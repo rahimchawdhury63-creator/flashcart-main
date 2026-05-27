@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<!--
+  =============================================================================
+  FLASHCART MAIN — Customer Portal
+  =============================================================================
+  
+  The primary HTML shell for the FlashCart customer-facing SPA.
+  
+  Critical SEO strategy:
+  1. Pre-rendered meta tags for Google crawler's first pass
+  2. Schema.org WebSite JSON-LD for sitelinks search box
+  3. OrganizationSchema for brand recognition
+  4. Preconnect to all external domains for faster loading
+  5. Critical CSS inlined for above-the-fold content (LCP optimization)
+  6. Noscript fallback content for crawlers that don't execute JS
+  7. Google Fonts loaded with display=swap for fast text rendering
+  8. Fabric CSS framework for layout foundation
+  
+  Every page component will use react-helmet-async to override these
+  defaults with page-specific meta tags dynamically.
+  
+  Developer: Rizwan Rahim Chowdhury
+  Powered by: Bangladesh Software Development Community (BSDC)
+  =============================================================================
+-->
+<head>
+  <!-- ================================================================== -->
+  <!-- CHARACTER ENCODING & VIEWPORT                                      -->
+  <!-- ================================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- ================================================================== -->
+  <!-- PRIMARY SEO META TAGS (Default — overridden by react-helmet-async) -->
+  <!-- ================================================================== -->
+  <title>FlashCart - Order Food, Grocery, Medicine Online | Free Delivery Bangladesh</title>
+  <meta name="description" content="FlashCart is Bangladesh's first free all-in-one delivery platform. Order food, groceries, medicine, electronics, and more from local shops near you. Cash on Delivery. Fast delivery across Bangladesh. FlashCart - বাংলাদেশের সেরা ডেলিভারি প্ল্যাটফর্ম।" />
+  <meta name="keywords" content="FlashCart, food delivery Bangladesh, grocery delivery, medicine delivery, online order Bangladesh, cash on delivery, ফ্ল্যাশকার্ট, খাবার ডেলিভারি, অনলাইন অর্ডার বাংলাদেশ, ক্যাশ অন ডেলিভারি, free delivery platform" />
+  <meta name="author" content="Rizwan Rahim Chowdhury" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <link rel="canonical" href="https://flashcart.bsdc.info.bd/" />
+
+  <!-- ================================================================== -->
+  <!-- HREFLANG TAGS — Bilingual SEO (Bangla + English)                   -->
+  <!-- ================================================================== -->
+  <link rel="alternate" hreflang="bn" href="https://flashcart.bsdc.info.bd/?lang=bn" />
+  <link rel="alternate" hreflang="en" href="https://flashcart.bsdc.info.bd/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://flashcart.bsdc.info.bd/" />
+
+  <!-- ================================================================== -->
+  <!-- OPEN GRAPH META TAGS — Facebook, LinkedIn, WhatsApp sharing        -->
+  <!-- ================================================================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FlashCart - Bangladesh's Free Delivery Platform" />
+  <meta property="og:description" content="Order food, groceries, medicine, and more from local shops. Cash on Delivery. 100% Free for shops to join." />
+  <meta property="og:url" content="https://flashcart.bsdc.info.bd/" />
+  <meta property="og:site_name" content="FlashCart" />
+  <meta property="og:locale" content="bn_BD" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://flashcart.bsdc.info.bd/icon-512x512.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content="FlashCart Logo - Bangladesh Delivery Platform" />
+
+  <!-- ================================================================== -->
+  <!-- TWITTER CARD META TAGS                                              -->
+  <!-- ================================================================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FlashCart - Bangladesh's Free Delivery Platform" />
+  <meta name="twitter:description" content="Order food, groceries, medicine from local shops. Cash on Delivery. Free for shops." />
+  <meta name="twitter:image" content="https://flashcart.bsdc.info.bd/icon-512x512.png" />
+
+  <!-- ================================================================== -->
+  <!-- FAVICON & APP ICONS                                                 -->
+  <!-- ================================================================== -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <!-- ================================================================== -->
+  <!-- PWA MANIFEST & THEME                                                -->
+  <!-- ================================================================== -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1B5E20" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FlashCart" />
+  <meta name="application-name" content="FlashCart" />
+  <meta name="msapplication-TileColor" content="#1B5E20" />
+
+  <!-- ================================================================== -->
+  <!-- PRECONNECT — Establish early connections to external domains         -->
+  <!-- This reduces DNS lookup + TCP handshake + TLS negotiation time      -->
+  <!-- ================================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+  <link rel="preconnect" href="https://flashcart-bd-default-rtdb.asia-southeast1.firebasedatabase.app" />
+  <link rel="preconnect" href="https://api.imgbb.com" />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
+  <link rel="dns-prefetch" href="https://tile.openstreetmap.org" />
+
+  <!-- ================================================================== -->
+  <!-- GOOGLE FONTS — Bangla (Hind Siliguri) + English (Inter, Poppins)   -->
+  <!-- display=swap ensures text is visible immediately with fallback font -->
+  <!-- ================================================================== -->
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- ================================================================== -->
+  <!-- LEAFLET CSS — Map styling (loaded from CDN for caching benefits)   -->
+  <!-- ================================================================== -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- ================================================================== -->
+  <!-- SCHEMA.ORG JSON-LD — WebSite + Organization (Static, always present)-->
+  <!-- These schemas enable Google sitelinks search box and brand knowledge-->
+  <!-- ================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FlashCart",
+    "alternateName": ["ফ্ল্যাশকার্ট", "FlashCart Bangladesh", "FlashCart BD"],
+    "url": "https://flashcart.bsdc.info.bd",
+    "description": "Bangladesh's first free all-in-one Cash-on-Delivery delivery platform for food, groceries, medicine, electronics, and more.",
+    "inLanguage": ["bn", "en"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://flashcart.bsdc.info.bd/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Bangladesh Software Development Community",
+      "url": "https://www.bsdc.info.bd"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "FlashCart",
+    "alternateName": "ফ্ল্যাশকার্ট",
+    "url": "https://flashcart.bsdc.info.bd",
+    "logo": "https://flashcart.bsdc.info.bd/icon-512x512.png",
+    "description": "Bangladesh's first free all-in-one delivery platform. Connecting local businesses with customers through Cash on Delivery.",
+    "foundingDate": "2024",
+    "founder": {
+      "@type": "Person",
+      "name": "Rizwan Rahim Chowdhury"
+    },
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Bangladesh Software Development Community",
+      "url": "https://www.bsdc.info.bd"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Bangladesh"
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- ================================================================== -->
+  <!-- CRITICAL INLINE CSS                                                 -->
+  <!-- Inlined styles for above-the-fold content to prevent FOUC          -->
+  <!-- (Flash of Unstyled Content) and improve LCP (Largest Contentful Paint)-->
+  <!-- ================================================================== -->
+  <style>
+    /* --- Critical Reset --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* --- Root Variables (subset for critical path) --- */
+    :root {
+      --color-primary: #1B5E20;
+      --color-primary-light: #2E7D32;
+      --color-white: #FFFFFF;
+      --color-off-white: #F8FAF8;
+      --color-text-primary: #1A1A1A;
+      --font-bangla: 'Hind Siliguri', 'SolaimanLipi', sans-serif;
+      --font-english: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    /* --- Body Base --- */
+    body {
+      font-family: var(--font-bangla);
+      background-color: var(--color-off-white);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- App Loading State --- */
+    /* Shows a branded loading screen while React initializes */
+    #root {
+      min-height: 100vh;
+    }
+
+    .app-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      color: var(--color-white);
+      font-family: var(--font-english);
+    }
+
+    .app-loading__logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 24px;
+      animation: pulse-loading 1.5s ease-in-out infinite;
+    }
+
+    .app-loading__text {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .app-loading__subtext {
+      font-size: 14px;
+      opacity: 0.8;
+      font-family: var(--font-bangla);
+    }
+
+    .app-loading__spinner {
+      width: 40px;
+      height: 40px;
+      margin-top: 32px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--color-white);
+      border-radius: 50%;
+      animation: spin-loading 0.8s linear infinite;
+    }
+
+    @keyframes pulse-loading {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+
+    @keyframes spin-loading {
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- Skip to Main Content (Accessibility) --- */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 8px 16px;
+      border-radius: 0 0 4px 4px;
+      z-index: 10000;
+      font-size: 14px;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ================================================================== -->
+  <!-- ACCESSIBILITY: Skip to Main Content Link                           -->
+  <!-- Allows keyboard users to skip navigation directly to content       -->
+  <!-- ================================================================== -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ================================================================== -->
+  <!-- REACT ROOT                                                          -->
+  <!-- React application mounts here. The loading screen shows while      -->
+  <!-- JavaScript bundles download, parse, and execute.                    -->
+  <!-- ================================================================== -->
+  <div id="root">
+    <!-- 
+      Initial loading state: Shown before React hydrates.
+      This ensures users see branded content immediately (not a blank page).
+      The SVG logo is inlined to avoid an additional network request.
+    -->
+    <div class="app-loading" aria-label="Loading FlashCart">
+      <!-- FlashCart Logo SVG — Lightning bolt in a cart shape -->
+      <svg class="app-loading__logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Cart body -->
+        <rect x="10" y="20" width="60" height="40" rx="8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2.5"/>
+        <!-- Lightning bolt -->
+        <path d="M44 18L32 42h10L36 62l16-26H42L48 18h-4z" fill="white"/>
+        <!-- Cart wheels -->
+        <circle cx="28" cy="66" r="5" fill="white" opacity="0.9"/>
+        <circle cx="52" cy="66" r="5" fill="white" opacity="0.9"/>
+        <!-- Cart handle -->
+        <path d="M10 24L4 12" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="app-loading__text">FlashCart</div>
+      <div class="app-loading__subtext">Loading your delivery experience...</div>
+      <div class="app-loading__spinner" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- NOSCRIPT FALLBACK                                                   -->
+  <!-- Content visible to search engine crawlers that don't execute JS    -->
+  <!-- and users who have JavaScript disabled                              -->
+  <!-- ================================================================== -->
+  <noscript>
+    <div style="max-width:800px;margin:40px auto;padding:20px;font-family:'Hind Siliguri',sans-serif;line-height:1.8;">
+      <h1 style="color:#1B5E20;font-size:32px;">FlashCart - Bangladesh's Free Delivery Platform</h1>
+      <h2 style="color:#1B5E20;font-size:22px;">ফ্ল্যাশকার্ট - বাংলাদেশের বিনামূল্যে ডেলিভারি প্ল্যাটফর্ম</h2>
+      <p>FlashCart is Bangladesh's first free, all-in-one Cash-on-Delivery delivery platform. Order food, groceries, medicine, electronics, clothing, books, and more from local shops near you.</p>
+      <p>ফ্ল্যাশকার্ট বাংলাদেশের প্রথম বিনামূল্যে অল-ইন-ওয়ান ক্যাশ-অন-ডেলিভারি প্ল্যাটফর্ম। আপনার কাছের দোকান থেকে খাবার, মুদি, ওষুধ, ইলেকট্রনিক্স, পোশাক, বই এবং আরও অনেক কিছু অর্ডার করুন।</p>
+      <h3>Our Categories</h3>
+      <ul>
+        <li>Restaurants &amp; Food Delivery (রেস্তোরাঁ ও খাবার ডেলিভারি)</li>
+        <li>Grocery Stores (মুদি দোকান)</li>
+        <li>Medical Stores &amp; Pharmacies (ওষুধের দোকান ও ফার্মেসি)</li>
+        <li>Electronics Shops (ইলেকট্রনিক্স দোকান)</li>
+        <li>Clothing Stores (পোশাকের দোকান)</li>
+        <li>Home Kitchen (হোম কিচেন)</li>
+        <li>Bookshops &amp; Libraries (বইয়ের দোকান)</li>
+        <li>Mobile Phone Shops (মোবাইল ফোনের দোকান)</li>
+        <li>Supermarkets (সুপারমার্কেট)</li>
+      </ul>
+      <h3>Why FlashCart?</h3>
+      <ul>
+        <li>100% Free for shops to join and sell</li>
+        <li>Cash on Delivery - No online payment needed</li>
+        <li>Fast delivery from local shops near you</li>
+        <li>Available across all of Bangladesh</li>
+        <li>Bilingual support (Bangla &amp; English)</li>
+      </ul>
+      <p>Please enable JavaScript to use FlashCart.</p>
+      <p><a href="https://www.bsdc.info.bd" style="color:#1B5E20;">Powered by Bangladesh Software Development Community (BSDC)</a></p>
+      <p>Developed by Rizwan Rahim Chowdhury</p>
+    </div>
+  </noscript>
+
+  <!-- ================================================================== -->
+  <!-- VITE ENTRY POINT                                                    -->
+  <!-- Vite injects the compiled JavaScript bundle here during build      -->
+  <!-- ================================================================== -->
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
