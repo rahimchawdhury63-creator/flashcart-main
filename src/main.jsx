@@ -1,110 +1,164 @@
 // ============================================================
 // FlashCart — Main Customer Portal Entry Point
+// CORRECTED VERSION — replaces Step 2 main.jsx
+//
+// CHANGE FROM STEP 2:
+// Step 2 used BrowserRouter wrapping App directly.
+// Step 11 introduced createBrowserRouter + RouterProvider.
+// These two router patterns cannot coexist.
+// This file now uses RouterProvider with the router from router.jsx.
+// BrowserRouter has been removed entirely from this file.
+//
+// The router.jsx file contains createBrowserRouter which:
+// 1. Internally creates its own BrowserRouter equivalent
+// 2. Provides the Outlet for nested routes
+// 3. Handles all route definitions with lazy loading
+// 4. Provides better error handling than BrowserRouter
+//
 // Developer: Rizwan Rahim Chowdhury
 // Powered by: Bangladesh Software Development Community (bsdc.info.bd)
 // ============================================================
 
-// Import React 18 core — required for JSX
+// React 18 core — required for JSX and hooks
 import React from 'react';
 
-// Import React 18 createRoot — the new concurrent rendering API
-// replaces ReactDOM.render() which is deprecated in React 18
+// React 18 createRoot — concurrent rendering API
+// Replaces the old ReactDOM.render() which is deprecated
 import { createRoot } from 'react-dom/client';
 
-// Import React Router — BrowserRouter provides URL-based navigation
-// Uses the browser History API for clean URLs without # hashes
-import { BrowserRouter } from 'react-router-dom';
+// RouterProvider — the component that renders the router
+// created by createBrowserRouter in router.jsx
+// This REPLACES BrowserRouter from Step 2
+import { RouterProvider } from 'react-router-dom';
 
-// Import React Helmet Async provider
-// HelmetProvider must wrap the entire app to enable dynamic meta tags
-// on every route — this is the core of our SEO strategy
+// React Helmet Async Provider — enables <Helmet> in all components
+// Must wrap the entire app so all pages can inject meta tags
+// Kept here because it wraps RouterProvider (outside all routes)
 import { HelmetProvider } from 'react-helmet-async';
 
-// Import the root App component
-// App.jsx contains all providers and the router configuration
-import App from './App';
+// The router configuration from router.jsx
+// Contains all routes, lazy loading, protected routes, etc.
+// createBrowserRouter was called in router.jsx — we just use its result
+import router from './router';
 
-// ── GLOBAL STYLES ────────────────────────────────────────────
-// Import in correct order — tokens first, then global, then utilities
-// This order ensures CSS custom properties are defined before use
+// ── GLOBAL STYLES (same order as Step 2) ─────────────────────
 
-// Design tokens — CSS custom properties (--fc-primary, etc.)
+// 1. Design tokens FIRST — defines all CSS custom properties
+//    All other stylesheets reference these variables
 import './styles/design-tokens.css';
 
-// CSS reset + base global styles
+// 2. Global reset and base element styles
+//    Normalizes browser defaults (margin, padding, box-sizing)
 import './styles/global.css';
 
-// Typography styles — font sizes, line heights, headings
+// 3. Typography — font sizes, line heights, heading scales
 import './styles/typography.css';
 
-// Utility classes — margin, padding, flex, grid helpers
+// 4. Utility classes — flex, grid, spacing, color helpers
 import './styles/utilities.css';
 
-// Keyframe animations — fade, slide, bounce, pulse
+// 5. Animation keyframes — all @keyframes definitions
 import './styles/animations.css';
 
-// Responsive utilities — breakpoint-specific helper classes
+// 6. Responsive utilities — breakpoint-specific helper classes
 import './styles/responsive.css';
 
-// Fabric CSS — grid and layout system
+// 7. Fabric CSS — 12-column grid system and layout utilities
 import './styles/fabric.css';
 
-// ── STRICT MODE ───────────────────────────────────────────────
-// React.StrictMode enables:
-// 1. Double-invokes functions to detect side effects
-// 2. Warns about deprecated lifecycle methods
-// 3. Warns about legacy string ref usage
-// 4. Detects unexpected side effects
-// NOTE: Double-invocation only happens in development, not production
+// ── ROOT ELEMENT ──────────────────────────────────────────────
 
-// ── ROOT ELEMENT ─────────────────────────────────────────────
-// Get the DOM element with id="root" from index.html
-// This is where React will mount the entire application
+// Get the DOM element where React mounts
+// This is the <div id="root"> in index.html
 const rootElement = document.getElementById('root');
 
-// Safety check — throw clear error if root element not found
-// This prevents confusing "Cannot read property of null" errors
+// Safety check — fail fast with a clear error message
+// Prevents the confusing "Cannot read properties of null" error
 if (!rootElement) {
   throw new Error(
-    'FlashCart: Root element #root not found in index.html. ' +
-    'Please check that index.html contains <div id="root"></div>'
+    '[FlashCart] Root element #root not found in index.html. ' +
+    'Ensure index.html contains <div id="root"></div> in the body.'
   );
 }
 
-// ── CREATE REACT ROOT ─────────────────────────────────────────
-// createRoot enables React 18 concurrent features:
-// - Automatic batching of state updates
-// - Transitions API (useTransition)
-// - Suspense improvements
-// - Concurrent rendering for better UX
+// ── CREATE REACT 18 CONCURRENT ROOT ──────────────────────────
+
+// createRoot enables React 18 features:
+// - Concurrent rendering (smoother UI updates)
+// - Automatic batching (fewer re-renders)
+// - Suspense improvements (better lazy loading)
+// - useTransition and useDeferredValue hooks
 const root = createRoot(rootElement);
 
-// ── RENDER APPLICATION ────────────────────────────────────────
-// Render the application with all required providers
+// ── RENDER THE APPLICATION ────────────────────────────────────
+
 root.render(
-  // StrictMode — development-only checks and warnings
+  // StrictMode — development-only helper
+  // Double-invokes render functions to detect side effects
+  // Warns about deprecated APIs and lifecycle methods
+  // Has ZERO impact on production builds
   <React.StrictMode>
 
-    {/* HelmetProvider — enables React Helmet Async globally */}
-    {/* Every component can now use <Helmet> to set meta tags */}
-    {/* helmetContext is not needed here — only for SSR */}
+    {/* HelmetProvider — must be the outermost wrapper */}
+    {/* Enables React Helmet Async on every route */}
+    {/* Every page component can now use <Helmet> to set meta tags */}
+    {/* This is the core of our SEO strategy */}
     <HelmetProvider>
 
-      {/* BrowserRouter — provides URL-based routing context */}
-      {/* All Link, useNavigate, useLocation hooks work inside this */}
-      {/* future={{ v7_startTransition: true }} enables React Router v7 transitions */}
-      <BrowserRouter
-        future={{
-          // Enable React Router v7 transition behavior
-          v7_startTransition: true,
-          // Enable relative splat path resolution (v7 behavior)
-          v7_relativeSplatPath: true,
-        }}
-      >
-        {/* App component — contains all context providers and routes */}
-        <App />
+      {/* RouterProvider replaces BrowserRouter from Step 2 */}
+      {/* It receives the complete router configuration */}
+      {/* from createBrowserRouter defined in router.jsx */}
+      {/* RouterProvider handles: */}
+      {/* - URL matching to route components */}
+      {/* - Navigation (Link, useNavigate) */}
+      {/* - Route params (useParams) */}
+      {/* - Location state (useLocation) */}
+      {/* - Error boundaries per route */}
+      {/* - Lazy loading with Suspense */}
+      <RouterProvider
+        router={router}
 
-      </BrowserRouter>
+        // fallbackElement shown while the router initializes
+        // This is different from Suspense — it's the router's own loading
+        // Usually resolves in < 50ms so users rarely see it
+        fallbackElement={
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '100vh',
+              background: '#FAFAFA',
+              fontFamily: 'Inter, sans-serif',
+            }}
+            role="status"
+            aria-label="Application loading"
+          >
+            {/* Simple inline spinner — no external dependencies needed */}
+            <div
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                border: '3px solid #E8F5E9',
+                borderTopColor: '#1B5E20',
+                animation: 'spin 0.8s linear infinite',
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Inline keyframes for the spinner */}
+            {/* Cannot use animation.css here — styles not loaded yet */}
+            <style>{`
+              @keyframes spin {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+              }
+            `}</style>
+          </div>
+        }
+      />
+
     </HelmetProvider>
   </React.StrictMode>
 );
