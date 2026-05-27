@@ -1,0 +1,234 @@
+/* ============================================================
+   FlashCart — Responsive Utility Classes
+   Mobile-first breakpoint system.
+   All components default to mobile — use these to modify
+   appearance at larger screen sizes.
+
+   Breakpoints:
+   xs:  280px  — Very small phones
+   sm:  375px  — Standard phones
+   md:  768px  — Tablets
+   lg:  1024px — Laptops
+   xl:  1280px — Desktops
+   2xl: 1440px — Large desktops
+   4k:  3840px — 4K displays
+   ============================================================ */
+
+/* ── HIDE/SHOW BY BREAKPOINT ──────────────────────────────── */
+
+/* Mobile only — hide on tablet and above */
+.mobile-only { display: block; }
+.desktop-only { display: none; }
+.tablet-only { display: none; }
+
+@media (min-width: 768px) {
+  /* Tablet and above */
+  .mobile-only  { display: none; }   /* Hide on tablet+ */
+  .tablet-only  { display: block; }  /* Show on tablet */
+  .desktop-only { display: none; }   /* Still hidden until desktop */
+}
+
+@media (min-width: 1024px) {
+  /* Desktop and above */
+  .tablet-only  { display: none; }   /* Hide tablet-specific on desktop */
+  .desktop-only { display: block; }  /* Show desktop-specific */
+}
+
+/* ── RESPONSIVE FLEX ──────────────────────────────────────── */
+/* Start as column on mobile, switch to row on larger screens */
+.flex-col-mobile {
+  display: flex;
+  flex-direction: column;   /* Column on mobile */
+}
+
+@media (min-width: 768px) {
+  .flex-col-mobile {
+    flex-direction: row;    /* Row on tablet+ */
+  }
+}
+
+/* ── RESPONSIVE GRID ──────────────────────────────────────── */
+/* Responsive grids that adjust column count by breakpoint */
+
+/* 1 col mobile → 2 col tablet → 3 col desktop → 4 col wide */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr)); /* 1 col on mobile */
+  gap: var(--fc-space-4);
+}
+
+@media (min-width: 480px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 col on 480px+ */
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 col on tablet */
+    gap: var(--fc-space-6);
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-responsive {
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 col on desktop */
+  }
+}
+
+/* Store card grid — optimized for store browsing */
+.grid-stores {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--fc-space-4);
+}
+
+@media (min-width: 480px) {
+  .grid-stores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-stores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--fc-space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-stores {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid-stores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Item/product grid — denser than store grid */
+.grid-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--fc-space-3);
+}
+
+@media (min-width: 768px) {
+  .grid-items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--fc-space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-items {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid-items {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ── RESPONSIVE PADDING ───────────────────────────────────── */
+/* Page-level padding that adjusts with screen size */
+.page-padding {
+  padding-left: var(--fc-space-4);   /* 16px on mobile */
+  padding-right: var(--fc-space-4);
+}
+
+@media (min-width: 768px) {
+  .page-padding {
+    padding-left: var(--fc-space-6);  /* 24px on tablet */
+    padding-right: var(--fc-space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-padding {
+    padding-left: var(--fc-space-8);  /* 32px on desktop */
+    padding-right: var(--fc-space-8);
+  }
+}
+
+/* ── RESPONSIVE FONT SIZES ────────────────────────────────── */
+/* Section headings that scale with screen */
+.heading-responsive {
+  font-size: var(--fc-text-xl);      /* 20px on mobile */
+  font-weight: var(--fc-font-bold);
+}
+
+@media (min-width: 768px) {
+  .heading-responsive {
+    font-size: var(--fc-text-2xl);   /* 24px on tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-responsive {
+    font-size: var(--fc-text-3xl);   /* 30px on desktop */
+  }
+}
+
+/* ── BOTTOM NAV SPACING ───────────────────────────────────── */
+/* Prevent content from hiding behind the mobile bottom nav */
+.has-bottom-nav {
+  padding-bottom: calc(var(--fc-bottom-nav-height) + var(--fc-space-4));
+}
+
+@media (min-width: 768px) {
+  /* No bottom nav on tablet and above */
+  .has-bottom-nav {
+    padding-bottom: 0;
+  }
+}
+
+/* ── HEADER SPACING ───────────────────────────────────────── */
+/* Push content below the sticky header */
+.has-header {
+  padding-top: var(--fc-header-height);
+}
+
+@media (min-width: 1024px) {
+  .has-header {
+    padding-top: var(--fc-header-height-lg);
+  }
+}
+
+/* ── SIDEBAR LAYOUT ───────────────────────────────────────── */
+/* Used in partner dashboard — sidebar + main content */
+.sidebar-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-layout .sidebar {
+  width: 0;              /* Hidden on mobile */
+  overflow: hidden;
+  transition: width var(--fc-transition-base);
+  flex-shrink: 0;
+}
+
+.sidebar-layout .sidebar.open {
+  width: 100%;           /* Full width drawer on mobile */
+}
+
+.sidebar-layout .main-content {
+  flex: 1;
+  min-width: 0;          /* Prevent flex overflow */
+  overflow-x: hidden;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-layout .sidebar {
+    width: var(--fc-sidebar-width); /* Fixed sidebar on desktop */
+  }
+
+  .sidebar-layout .sidebar.open {
+    width: var(--fc-sidebar-width); /* Same — not a drawer on desktop */
+  }
+}
