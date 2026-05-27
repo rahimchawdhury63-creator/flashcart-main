@@ -1,0 +1,102 @@
+/**
+ * =============================================================================
+ * FLASHCART — Dark Mode Support
+ * =============================================================================
+ *
+ * Purpose: Optional dark mode theme that overrides CSS custom properties.
+ * Activated by adding class "dark" to <html> element.
+ * Also respects system preference via prefers-color-scheme.
+ *
+ * Strategy: Override :root variables inside .dark selector.
+ * All components automatically adapt since they use CSS variables.
+ *
+ * Developer: Rizwan Rahim Chowdhury
+ * =============================================================================
+ */
+
+/* =========================================================================== */
+/* DARK MODE — Manual Toggle (class-based)                                     */
+/* =========================================================================== */
+
+html.dark {
+  /* Brand colors — slightly lighter for dark backgrounds */
+  --color-primary: #4CAF50;
+  --color-primary-hover: #43A047;
+  --color-primary-light: #66BB6A;
+  --color-primary-lighter: #81C784;
+  --color-primary-pale: rgba(76, 175, 80, 0.12);
+  --color-primary-ghost: rgba(76, 175, 80, 0.06);
+
+  /* Accent */
+  --color-accent: #69F0AE;
+  --color-accent-hover: #00E676;
+
+  /* Surfaces */
+  --color-white: #1E1E1E;
+  --color-off-white: #121212;
+  --color-snow: #1A1A1A;
+  --color-surface: #1E1E1E;
+  --color-surface-raised: #252525;
+  --color-surface-sunken: #141414;
+
+  /* Text */
+  --color-text-primary: #E8E8E8;
+  --color-text-secondary: #B0B0B0;
+  --color-text-tertiary: #808080;
+  --color-text-muted: #606060;
+  --color-text-link: #81C784;
+  --color-text-link-hover: #A5D6A7;
+
+  /* Borders */
+  --color-border: #333333;
+  --color-border-light: #2A2A2A;
+  --color-border-focus: #4CAF50;
+  --color-divider: #2A2A2A;
+
+  /* Grays */
+  --color-gray-50: #1A1A1A;
+  --color-gray-100: #222222;
+  --color-gray-200: #2A2A2A;
+  --color-gray-300: #333333;
+  --color-gray-400: #555555;
+  --color-gray-500: #777777;
+  --color-gray-600: #999999;
+  --color-gray-700: #AAAAAA;
+  --color-gray-800: #CCCCCC;
+  --color-gray-900: #E8E8E8;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  /* Scrollbar */
+  --scrollbar-track: #1A1A1A;
+  --scrollbar-thumb: #444444;
+  --scrollbar-thumb-hover: #555555;
+}
+
+/* =========================================================================== */
+/* DARK MODE — System Preference (auto)                                        */
+/* =========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  html.dark-auto {
+    /* Same overrides as html.dark above */
+    --color-primary: #4CAF50;
+    --color-primary-hover: #43A047;
+    --color-primary-pale: rgba(76, 175, 80, 0.12);
+    --color-white: #1E1E1E;
+    --color-off-white: #121212;
+    --color-surface: #1E1E1E;
+    --color-text-primary: #E8E8E8;
+    --color-text-secondary: #B0B0B0;
+    --color-border: #333333;
+    --color-divider: #2A2A2A;
+    --color-gray-100: #222222;
+    --color-gray-200: #2A2A2A;
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+}
