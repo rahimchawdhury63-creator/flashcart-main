@@ -1,0 +1,276 @@
+/* ============================================================
+   FlashCart — Global Styles & CSS Reset
+   Normalizes browser defaults and sets up base styles.
+   All components build on top of these foundations.
+   ============================================================ */
+
+/* ── MODERN CSS RESET ────────────────────────────────────── */
+/* Based on Andy Bell's Modern CSS Reset + custom additions */
+
+/* Box-sizing border-box: width includes padding and border */
+/* This prevents elements from overflowing their containers */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* All elements use border-box model */
+  margin: 0;              /* Remove default browser margins */
+  padding: 0;             /* Remove default browser padding */
+}
+
+/* Remove list styles on ul, ol elements with a list role */
+/* Prevents VoiceOver from removing list semantics in Safari */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none; /* No bullets/numbers for styled lists */
+}
+
+/* Set core root defaults */
+html {
+  /* Smooth scrolling for anchor links */
+  scroll-behavior: smooth;
+
+  /* Prevent horizontal overflow on mobile — critical for 280px screens */
+  overflow-x: hidden;
+
+  /* Improve text rendering on macOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Improve text rendering quality */
+  text-rendering: optimizeLegibility;
+
+  /* Set font size to 100% (16px) for accessibility */
+  /* Users who change browser font size will benefit */
+  font-size: 100%;
+
+  /* Prevent font scaling on orientation change in iOS */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Set core body defaults */
+body {
+  /* Apply the primary font family — Inter for English, Hind Siliguri for Bangla */
+  font-family: var(--fc-font-primary);
+
+  /* Base font size */
+  font-size: var(--fc-text-base);
+
+  /* Default font weight — regular */
+  font-weight: var(--fc-font-normal);
+
+  /* Comfortable line height for readability */
+  line-height: var(--fc-leading-normal);
+
+  /* Default text color — not pure black for reduced eye strain */
+  color: var(--fc-gray-900);
+
+  /* Off-white background — slightly warmer than pure white */
+  background-color: var(--fc-off-white);
+
+  /* Prevent horizontal scroll on any screen size */
+  overflow-x: hidden;
+
+  /* Full viewport height minimum — prevents footer from floating */
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1, h2, h3, h4, h5, h6, button, label, input {
+  line-height: var(--fc-leading-tight);
+}
+
+/* ── HEADING DEFAULTS ─────────────────────────────────────── */
+/* Remove browser default heading styles — typography.css adds them back */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--fc-font-bold); /* Bold headings by default */
+  color: var(--fc-gray-900);        /* Near-black for readability */
+}
+
+/* ── LINK DEFAULTS ────────────────────────────────────────── */
+a {
+  color: var(--fc-primary-light);      /* Brand green for links */
+  text-decoration: none;               /* No underline by default */
+  transition: color var(--fc-transition-fast); /* Smooth color change */
+}
+
+a:hover {
+  color: var(--fc-primary);            /* Darker on hover */
+  text-decoration: underline;          /* Underline on hover for clarity */
+}
+
+/* Remove underline from navigation links */
+a:where([class]) {
+  text-decoration: none; /* Links with class — no underline */
+}
+
+/* ── IMAGE DEFAULTS ───────────────────────────────────────── */
+img, picture, video, canvas, svg {
+  display: block;       /* Block prevents inline gap */
+  max-width: 100%;      /* Never overflow container */
+}
+
+img {
+  height: auto;         /* Maintain aspect ratio */
+  object-fit: cover;    /* Default fill behavior */
+}
+
+/* ── FORM ELEMENT RESETS ──────────────────────────────────── */
+/* Inherit fonts for form elements — browsers don't do this by default */
+input, button, textarea, select {
+  font: inherit;        /* Use body font instead of browser default */
+  color: inherit;       /* Use parent text color */
+}
+
+/* Remove default button styles */
+button {
+  background: none;     /* No background */
+  border: none;         /* No border */
+  cursor: pointer;      /* Pointer cursor */
+  padding: 0;           /* No padding */
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  /* Custom focus ring using brand color */
+  outline: 2px solid var(--fc-primary-light);
+  outline-offset: 2px;
+  border-radius: var(--fc-radius-sm);
+}
+
+/* Remove default focus outline — we use focus-visible instead */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── TEXTAREA DEFAULTS ────────────────────────────────────── */
+textarea {
+  resize: vertical;     /* Only allow vertical resizing */
+  min-height: 100px;    /* Minimum readable height */
+}
+
+/* ── TABLE DEFAULTS ───────────────────────────────────────── */
+table {
+  border-collapse: collapse; /* Remove gaps between cells */
+  width: 100%;               /* Full width by default */
+}
+
+/* ── HORIZONTAL RULE ──────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid var(--fc-gray-200);
+  margin: var(--fc-space-4) 0;
+}
+
+/* ── OVERFLOW PROTECTION ──────────────────────────────────── */
+/* Prevent long words from breaking layout on narrow screens */
+p, li, dd {
+  overflow-wrap: break-word;  /* Break long words to prevent overflow */
+  word-break: break-word;     /* Safari compatibility */
+}
+
+/* ── SELECTION COLOR ──────────────────────────────────────── */
+/* Brand-colored text selection for professional feel */
+::selection {
+  background-color: var(--fc-primary-pale);
+  color: var(--fc-primary);
+}
+
+/* ── SCROLLBAR STYLING ────────────────────────────────────── */
+/* Custom scrollbar for webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;             /* Thin scrollbar */
+  height: 6px;            /* Horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--fc-gray-100); /* Track background */
+  border-radius: var(--fc-radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fc-gray-300);  /* Thumb color */
+  border-radius: var(--fc-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fc-primary-lighter); /* Brand color on hover */
+}
+
+/* ── ROOT APP WRAPPER ─────────────────────────────────────── */
+/* The React #root div should fill the viewport */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;  /* Dynamic viewport for mobile */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;  /* Belt and suspenders — prevent scroll */
+}
+
+/* ── UTILITY: VISUALLY HIDDEN ─────────────────────────────── */
+/* Hides element visually but keeps it accessible to screen readers */
+/* Use for: icon button labels, skip navigation, screen reader text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── SKIP NAVIGATION LINK ─────────────────────────────────── */
+/* Allows keyboard users to skip navigation and go to main content */
+.skip-to-main {
+  position: absolute;
+  top: -100%;           /* Hidden off-screen by default */
+  left: var(--fc-space-4);
+  z-index: var(--fc-z-top);
+  padding: var(--fc-space-2) var(--fc-space-4);
+  background: var(--fc-primary);
+  color: var(--fc-white);
+  border-radius: var(--fc-radius-md);
+  font-weight: var(--fc-font-semibold);
+  transition: top var(--fc-transition-fast);
+}
+
+/* Show skip link when focused by keyboard */
+.skip-to-main:focus {
+  top: var(--fc-space-4); /* Slides into view on focus */
+}
+
+/* ── LOADING STATE ────────────────────────────────────────── */
+/* Applied to body while initial app loads */
+body.loading {
+  overflow: hidden; /* Prevent scroll during loading */
+}
+
+/* ── PRINT STYLES ─────────────────────────────────────────── */
+@media print {
+  /* Hide navigation and interactive elements when printing */
+  header, footer, nav, .bottom-nav, .btn-group {
+    display: none !important;
+  }
+
+  /* Ensure text is black for printing */
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  /* Show full URLs after links when printing */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+}
