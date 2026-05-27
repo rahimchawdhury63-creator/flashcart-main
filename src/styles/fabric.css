@@ -1,0 +1,178 @@
+/* ============================================================
+   FlashCart — Fabric CSS Grid System
+   A lightweight, custom grid system inspired by Fabric CSS.
+   12-column responsive grid for page layouts.
+   ============================================================ */
+
+/* ── FABRIC GRID CONTAINER ────────────────────────────────── */
+/* Wraps all grid rows */
+.fc-container {
+  width: 100%;
+  max-width: var(--fc-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--fc-space-4);
+  padding-right: var(--fc-space-4);
+}
+
+/* ── FABRIC ROW ───────────────────────────────────────────── */
+/* Horizontal group of columns */
+/* Negative margin compensates for column gutters */
+.fc-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(var(--fc-space-3) * -1);  /* Compensate column gap */
+  margin-right: calc(var(--fc-space-3) * -1);
+}
+
+/* No gutter variant */
+.fc-row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.fc-row.no-gutter > [class*='fc-col'] {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ── FABRIC COLUMNS ───────────────────────────────────────── */
+/* Mobile-first: all columns are full-width by default */
+[class*='fc-col'] {
+  width: 100%;           /* Full width on mobile */
+  padding-left: var(--fc-space-3);   /* Column gutter */
+  padding-right: var(--fc-space-3);
+  margin-bottom: var(--fc-space-4);  /* Row gap */
+}
+
+/* ── BREAKPOINT: sm — 375px+ ──────────────────────────────── */
+@media (min-width: 375px) {
+  .fc-col-sm-6  { width: 50%; }   /* Half width */
+  .fc-col-sm-12 { width: 100%; }  /* Full width */
+}
+
+/* ── BREAKPOINT: md — 768px+ ──────────────────────────────── */
+@media (min-width: 768px) {
+  .fc-col-md-1  { width: 8.333%; }   /* 1/12 */
+  .fc-col-md-2  { width: 16.667%; }  /* 2/12 */
+  .fc-col-md-3  { width: 25%; }      /* 3/12 = quarter */
+  .fc-col-md-4  { width: 33.333%; }  /* 4/12 = third */
+  .fc-col-md-5  { width: 41.667%; }  /* 5/12 */
+  .fc-col-md-6  { width: 50%; }      /* 6/12 = half */
+  .fc-col-md-7  { width: 58.333%; }  /* 7/12 */
+  .fc-col-md-8  { width: 66.667%; }  /* 8/12 = two-thirds */
+  .fc-col-md-9  { width: 75%; }      /* 9/12 = three-quarters */
+  .fc-col-md-10 { width: 83.333%; }  /* 10/12 */
+  .fc-col-md-11 { width: 91.667%; }  /* 11/12 */
+  .fc-col-md-12 { width: 100%; }     /* 12/12 = full */
+}
+
+/* ── BREAKPOINT: lg — 1024px+ ────────────────────────────── */
+@media (min-width: 1024px) {
+  .fc-col-lg-1  { width: 8.333%; }
+  .fc-col-lg-2  { width: 16.667%; }
+  .fc-col-lg-3  { width: 25%; }
+  .fc-col-lg-4  { width: 33.333%; }
+  .fc-col-lg-5  { width: 41.667%; }
+  .fc-col-lg-6  { width: 50%; }
+  .fc-col-lg-7  { width: 58.333%; }
+  .fc-col-lg-8  { width: 66.667%; }
+  .fc-col-lg-9  { width: 75%; }
+  .fc-col-lg-10 { width: 83.333%; }
+  .fc-col-lg-11 { width: 91.667%; }
+  .fc-col-lg-12 { width: 100%; }
+}
+
+/* ── BREAKPOINT: xl — 1280px+ ────────────────────────────── */
+@media (min-width: 1280px) {
+  .fc-col-xl-3  { width: 25%; }
+  .fc-col-xl-4  { width: 33.333%; }
+  .fc-col-xl-6  { width: 50%; }
+  .fc-col-xl-8  { width: 66.667%; }
+  .fc-col-xl-9  { width: 75%; }
+  .fc-col-xl-12 { width: 100%; }
+}
+
+/* ── FLEX UTILITIES ───────────────────────────────────────── */
+/* Common flex patterns used in layouts */
+.fc-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fc-flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.fc-flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ── SECTION SPACING ──────────────────────────────────────── */
+/* Consistent vertical spacing between page sections */
+.fc-section {
+  padding-top: var(--fc-space-8);      /* 32px on mobile */
+  padding-bottom: var(--fc-space-8);
+}
+
+@media (min-width: 768px) {
+  .fc-section {
+    padding-top: var(--fc-space-12);   /* 48px on tablet */
+    padding-bottom: var(--fc-space-12);
+  }
+}
+
+@media (min-width: 1024px) {
+  .fc-section {
+    padding-top: var(--fc-space-16);   /* 64px on desktop */
+    padding-bottom: var(--fc-space-16);
+  }
+}
+
+/* ── CARD GRID ────────────────────────────────────────────── */
+/* Fabric-style card grid with responsive columns */
+.fc-card-grid {
+  display: grid;
+  gap: var(--fc-space-4);
+  /* 1 column on the smallest screens */
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  /* 2 columns on larger mobile */
+  .fc-card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  /* 3 columns on tablet */
+  .fc-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--fc-space-6);
+  }
+}
+
+@media (min-width: 1280px) {
+  /* 4 columns on wide desktop */
+  .fc-card-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1920px) {
+  /* 5 columns on Full HD and above */
+  .fc-card-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+@media (min-width: 2560px) {
+  /* 6 columns on 2K and above */
+  .fc-card-grid { grid-template-columns: repeat(6, 1fr); }
+}
