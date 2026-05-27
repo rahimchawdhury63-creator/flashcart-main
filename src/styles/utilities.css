@@ -1,0 +1,290 @@
+/* ============================================================
+   FlashCart — Utility Classes
+   Single-purpose classes for rapid layout and styling.
+   Inspired by Tailwind CSS methodology but custom-built.
+   ============================================================ */
+
+/* ── DISPLAY ──────────────────────────────────────────────── */
+.block        { display: block; }
+.inline       { display: inline; }
+.inline-block { display: inline-block; }
+.hidden       { display: none; }
+.flex         { display: flex; }
+.inline-flex  { display: inline-flex; }
+.grid         { display: grid; }
+.inline-grid  { display: inline-grid; }
+
+/* ── FLEXBOX ──────────────────────────────────────────────── */
+.flex-row     { flex-direction: row; }
+.flex-col     { flex-direction: column; }
+.flex-wrap    { flex-wrap: wrap; }
+.flex-nowrap  { flex-wrap: nowrap; }
+
+.items-start    { align-items: flex-start; }
+.items-center   { align-items: center; }
+.items-end      { align-items: flex-end; }
+.items-stretch  { align-items: stretch; }
+.items-baseline { align-items: baseline; }
+
+.justify-start    { justify-content: flex-start; }
+.justify-center   { justify-content: center; }
+.justify-end      { justify-content: flex-end; }
+.justify-between  { justify-content: space-between; }
+.justify-around   { justify-content: space-around; }
+.justify-evenly   { justify-content: space-evenly; }
+
+.flex-1    { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-none { flex: none; }
+.flex-grow { flex-grow: 1; }
+
+.self-start   { align-self: flex-start; }
+.self-center  { align-self: center; }
+.self-end     { align-self: flex-end; }
+.self-stretch { align-self: stretch; }
+
+/* ── GAP ──────────────────────────────────────────────────── */
+.gap-1  { gap: var(--fc-space-1); }
+.gap-2  { gap: var(--fc-space-2); }
+.gap-3  { gap: var(--fc-space-3); }
+.gap-4  { gap: var(--fc-space-4); }
+.gap-6  { gap: var(--fc-space-6); }
+.gap-8  { gap: var(--fc-space-8); }
+.gap-x-2  { column-gap: var(--fc-space-2); }
+.gap-x-4  { column-gap: var(--fc-space-4); }
+.gap-y-2  { row-gap: var(--fc-space-2); }
+.gap-y-4  { row-gap: var(--fc-space-4); }
+
+/* ── GRID ─────────────────────────────────────────────────── */
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Auto-fill grids — responsive without media queries */
+.grid-auto-fill-200 { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.grid-auto-fill-280 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.grid-auto-fill-320 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+/* ── POSITION ─────────────────────────────────────────────── */
+.relative  { position: relative; }
+.absolute  { position: absolute; }
+.fixed     { position: fixed; }
+.sticky    { position: sticky; }
+.static    { position: static; }
+
+/* Centering with position absolute */
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ── OVERFLOW ─────────────────────────────────────────────── */
+.overflow-hidden   { overflow: hidden; }
+.overflow-auto     { overflow: auto; }
+.overflow-scroll   { overflow: scroll; }
+.overflow-x-auto   { overflow-x: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-auto   { overflow-y: auto; }
+
+/* Scrollable horizontal list — for category tabs, filter chips */
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none;             /* Hide scrollbar Firefox */
+}
+
+/* Hide scrollbar on webkit */
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── WIDTH & HEIGHT ───────────────────────────────────────── */
+.w-full    { width: 100%; }
+.w-screen  { width: 100vw; }
+.w-auto    { width: auto; }
+.h-full    { height: 100%; }
+.h-screen  { height: 100vh; }
+.h-auto    { height: auto; }
+.min-h-screen { min-height: 100vh; min-height: 100dvh; }
+.min-h-0   { min-height: 0; }
+
+/* ── MARGIN SCALE ─────────────────────────────────────────── */
+.m-0  { margin: 0; }
+.m-1  { margin: var(--fc-space-1); }
+.m-2  { margin: var(--fc-space-2); }
+.m-4  { margin: var(--fc-space-4); }
+.m-auto { margin: auto; }
+
+.mt-0  { margin-top: 0; }
+.mt-1  { margin-top: var(--fc-space-1); }
+.mt-2  { margin-top: var(--fc-space-2); }
+.mt-4  { margin-top: var(--fc-space-4); }
+.mt-6  { margin-top: var(--fc-space-6); }
+.mt-8  { margin-top: var(--fc-space-8); }
+.mt-auto { margin-top: auto; }
+
+.mb-0  { margin-bottom: 0; }
+.mb-1  { margin-bottom: var(--fc-space-1); }
+.mb-2  { margin-bottom: var(--fc-space-2); }
+.mb-4  { margin-bottom: var(--fc-space-4); }
+.mb-6  { margin-bottom: var(--fc-space-6); }
+.mb-8  { margin-bottom: var(--fc-space-8); }
+
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* ── PADDING SCALE ────────────────────────────────────────── */
+.p-0  { padding: 0; }
+.p-1  { padding: var(--fc-space-1); }
+.p-2  { padding: var(--fc-space-2); }
+.p-3  { padding: var(--fc-space-3); }
+.p-4  { padding: var(--fc-space-4); }
+.p-6  { padding: var(--fc-space-6); }
+.p-8  { padding: var(--fc-space-8); }
+
+.px-2  { padding-left: var(--fc-space-2); padding-right: var(--fc-space-2); }
+.px-4  { padding-left: var(--fc-space-4); padding-right: var(--fc-space-4); }
+.px-6  { padding-left: var(--fc-space-6); padding-right: var(--fc-space-6); }
+.px-8  { padding-left: var(--fc-space-8); padding-right: var(--fc-space-8); }
+
+.py-2  { padding-top: var(--fc-space-2); padding-bottom: var(--fc-space-2); }
+.py-4  { padding-top: var(--fc-space-4); padding-bottom: var(--fc-space-4); }
+.py-6  { padding-top: var(--fc-space-6); padding-bottom: var(--fc-space-6); }
+.py-8  { padding-top: var(--fc-space-8); padding-bottom: var(--fc-space-8); }
+
+/* ── BACKGROUND COLORS ────────────────────────────────────── */
+.bg-white      { background-color: var(--fc-white); }
+.bg-off-white  { background-color: var(--fc-off-white); }
+.bg-gray-50    { background-color: var(--fc-gray-50); }
+.bg-gray-100   { background-color: var(--fc-gray-100); }
+.bg-primary    { background-color: var(--fc-primary); }
+.bg-primary-pale { background-color: var(--fc-primary-pale); }
+.bg-accent     { background-color: var(--fc-accent); }
+
+/* ── BORDER RADIUS ────────────────────────────────────────── */
+.rounded-none { border-radius: var(--fc-radius-none); }
+.rounded-sm   { border-radius: var(--fc-radius-sm); }
+.rounded      { border-radius: var(--fc-radius-md); }
+.rounded-lg   { border-radius: var(--fc-radius-lg); }
+.rounded-xl   { border-radius: var(--fc-radius-xl); }
+.rounded-full { border-radius: var(--fc-radius-full); }
+
+/* ── SHADOWS ──────────────────────────────────────────────── */
+.shadow-none  { box-shadow: none; }
+.shadow-sm    { box-shadow: var(--fc-shadow-sm); }
+.shadow       { box-shadow: var(--fc-shadow-md); }
+.shadow-lg    { box-shadow: var(--fc-shadow-lg); }
+.shadow-xl    { box-shadow: var(--fc-shadow-xl); }
+.shadow-green { box-shadow: var(--fc-shadow-green); }
+
+/* ── CONTAINERS ───────────────────────────────────────────── */
+/* Main container — centers content with max-width and responsive padding */
+.container {
+  width: 100%;
+  max-width: var(--fc-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  /* Responsive horizontal padding — more space on wider screens */
+  padding-left: max(var(--fc-space-4), env(safe-area-inset-left));
+  padding-right: max(var(--fc-space-4), env(safe-area-inset-right));
+}
+
+/* Content section — slightly narrower for readability */
+.content-container {
+  width: 100%;
+  max-width: var(--fc-container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--fc-space-4);
+  padding-right: var(--fc-space-4);
+}
+
+/* ── CURSOR ───────────────────────────────────────────────── */
+.cursor-pointer  { cursor: pointer; }
+.cursor-default  { cursor: default; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+/* ── POINTER EVENTS ───────────────────────────────────────── */
+.pointer-none  { pointer-events: none; }
+.pointer-auto  { pointer-events: auto; }
+
+/* ── OPACITY ──────────────────────────────────────────────── */
+.opacity-0    { opacity: 0; }
+.opacity-50   { opacity: 0.5; }
+.opacity-75   { opacity: 0.75; }
+.opacity-100  { opacity: 1; }
+
+/* Disabled state appearance */
+.disabled, [disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── TRANSITIONS ──────────────────────────────────────────── */
+.transition        { transition: all var(--fc-transition-base); }
+.transition-fast   { transition: all var(--fc-transition-fast); }
+.transition-colors { transition: color var(--fc-transition-fast), background-color var(--fc-transition-fast), border-color var(--fc-transition-fast); }
+.transition-transform { transition: transform var(--fc-transition-base); }
+.transition-opacity { transition: opacity var(--fc-transition-base); }
+
+/* ── HOVER TRANSFORM ──────────────────────────────────────── */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--fc-shadow-lg);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ── ASPECT RATIO ─────────────────────────────────────────── */
+.aspect-square    { aspect-ratio: 1 / 1; }
+.aspect-video     { aspect-ratio: 16 / 9; }
+.aspect-store     { aspect-ratio: 3 / 2; }  /* Store cover images */
+.aspect-item      { aspect-ratio: 4 / 3; }  /* Item/product images */
+
+/* ── Z-INDEX ──────────────────────────────────────────────── */
+.z-base     { z-index: var(--fc-z-base); }
+.z-raised   { z-index: var(--fc-z-raised); }
+.z-dropdown { z-index: var(--fc-z-dropdown); }
+.z-sticky   { z-index: var(--fc-z-sticky); }
+.z-modal    { z-index: var(--fc-z-modal); }
+.z-toast    { z-index: var(--fc-z-toast); }
+
+/* ── OVERLAY ──────────────────────────────────────────────── */
+/* Dark backdrop for modals and drawers */
+.overlay {
+  position: fixed;
+  inset: 0;             /* top: 0; right: 0; bottom: 0; left: 0 */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--fc-z-overlay);
+  backdrop-filter: blur(2px); /* Subtle blur behind modal */
+}
+
+/* ── SAFE AREA INSETS ─────────────────────────────────────── */
+/* Handle iPhone notch and home indicator */
+.safe-top    { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-left   { padding-left: env(safe-area-inset-left); }
+.safe-right  { padding-right: env(safe-area-inset-right); }
+
+/* ── DIVIDER ──────────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--fc-gray-200);
+  margin: var(--fc-space-4) 0;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 100%;
+  background-color: var(--fc-gray-200);
+  margin: 0 var(--fc-space-4);
+}
