@@ -1,0 +1,241 @@
+/**
+ * =============================================================================
+ * FLASHCART — Animations & Keyframes
+ * =============================================================================
+ *
+ * Purpose: Centralized animation definitions for consistent motion design.
+ * All animations respect prefers-reduced-motion (see global.css).
+ *
+ * Developer: Rizwan Rahim Chowdhury
+ * =============================================================================
+ */
+
+/* =========================================================================== */
+/* KEYFRAMES                                                                   */
+/* =========================================================================== */
+
+/* Spin — used by spinners and loading indicators */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Fade In — generic opacity transition */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Fade Out */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Slide Up — modals, toasts, bottom sheets */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide Up Full — bottom sheet from bottom of screen */
+@keyframes slideUpFull {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Slide Down */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In Right — toasts, notifications */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In Left — sidebar */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale Up — badges, popups, menus */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scale Down — for closing */
+@keyframes scaleDown {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Bounce In — attention-grabbing elements */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse — notification indicators, live dots */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Pulse Ring — expanding ring around status dots */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Shimmer — skeleton loading animation */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Shake — error indication */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* Float — gentle up-and-down */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Ripple — button press feedback */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Progress bar indeterminate */
+@keyframes indeterminate {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* Slide In Up (for list items appearing) */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Rotate and fade (for refresh indicators) */
+@keyframes rotateFade {
+  from { transform: rotate(0deg); opacity: 0.5; }
+  to { transform: rotate(360deg); opacity: 1; }
+}
+
+/* =========================================================================== */
+/* ANIMATION UTILITY CLASSES                                                   */
+/* =========================================================================== */
+
+.animate-fade-in { animation: fadeIn var(--transition-normal) var(--ease-out) forwards; }
+.animate-fade-out { animation: fadeOut var(--transition-normal) var(--ease-out) forwards; }
+.animate-slide-up { animation: slideUp var(--transition-slow) var(--ease-spring) forwards; }
+.animate-slide-down { animation: slideDown var(--transition-slow) var(--ease-spring) forwards; }
+.animate-slide-in-right { animation: slideInRight var(--transition-slow) var(--ease-spring) forwards; }
+.animate-slide-in-left { animation: slideInLeft var(--transition-slow) var(--ease-spring) forwards; }
+.animate-scale-up { animation: scaleUp var(--transition-normal) var(--ease-spring) forwards; }
+.animate-bounce-in { animation: bounceIn 0.5s var(--ease-spring) forwards; }
+.animate-pulse { animation: pulse 2s var(--ease-in-out) infinite; }
+.animate-spin { animation: spin 0.7s linear infinite; }
+.animate-shimmer { animation: shimmer 1.5s var(--ease-in-out) infinite; }
+.animate-shake { animation: shake 0.5s var(--ease-in-out); }
+.animate-float { animation: float 3s var(--ease-in-out) infinite; }
+
+/* Staggered list animation */
+.stagger-enter > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-enter > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-enter > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-enter > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-enter > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-enter > *:nth-child(6) { animation-delay: 250ms; }
+.stagger-enter > *:nth-child(7) { animation-delay: 300ms; }
+.stagger-enter > *:nth-child(8) { animation-delay: 350ms; }
+
+.stagger-enter > * {
+  opacity: 0;
+  animation: slideInUp var(--transition-slow) var(--ease-out) forwards;
+}
+
+/* Transition helper */
+.transition-all { transition: var(--transition-all); }
+.transition-colors { transition: var(--transition-colors); }
+.transition-transform { transition: var(--transition-transform); }
+.transition-opacity { transition: var(--transition-opacity); }
+.transition-shadow { transition: var(--transition-shadow); }
