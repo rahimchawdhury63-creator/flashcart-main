@@ -1,0 +1,29 @@
+{
+  "name": "flashcart-main",
+  "version": "1.0.0",
+  "description": "FlashCart — Bangladesh's Fastest Free Delivery Platform — Customer Portal",
+  "author": "Rizwan Rahim Chowdhury — Bangladesh Software Development Community (bsdc.info.bd)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.26.2",
+    "react-helmet-async": "2.0.5",
+    "firebase": "10.14.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.2",
+    "vite": "5.4.8",
+    "eslint": "8.57.1",
+    "eslint-plugin-react": "7.37.1",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-react-refresh": "0.4.12"
+  }
+}
