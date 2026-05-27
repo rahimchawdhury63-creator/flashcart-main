@@ -1,0 +1,257 @@
+/* ============================================================
+   FlashCart — Footer Component Styles
+   Full-width footer with responsive column layout.
+   ============================================================ */
+
+/* ── FOOTER WRAPPER ───────────────────────────────────────── */
+.fc-footer {
+  background: var(--fc-gray-900);       /* Near-black background */
+  color: var(--fc-gray-400);            /* Muted text color */
+  padding-top: var(--fc-space-12);      /* 48px top padding */
+  padding-bottom: var(--fc-space-8);    /* 32px bottom padding */
+  margin-top: auto;                     /* Push footer to bottom */
+}
+
+/* ── FOOTER CONTAINER ─────────────────────────────────────── */
+.footer-container {
+  max-width: var(--fc-max-width);
+  margin: 0 auto;
+  padding: 0 var(--fc-space-4);
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    padding: 0 var(--fc-space-6);
+  }
+}
+
+/* ── TOP SECTION ──────────────────────────────────────────── */
+.footer-top {
+  display: grid;
+  /* 1 column on mobile */
+  grid-template-columns: 1fr;
+  gap: var(--fc-space-8);
+  margin-bottom: var(--fc-space-8);
+}
+
+/* 2 columns on tablet */
+@media (min-width: 600px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 4 columns on desktop */
+@media (min-width: 1024px) {
+  .footer-top {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--fc-space-8);
+  }
+}
+
+/* ── BRAND COLUMN ─────────────────────────────────────────── */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+}
+
+/* Logo */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+}
+
+.footer-logo-text {
+  font-size: var(--fc-text-xl);
+  font-weight: var(--fc-font-extrabold);
+  color: var(--fc-white);
+  letter-spacing: -0.02em;
+}
+
+/* Tagline */
+.footer-tagline {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-400);
+  line-height: var(--fc-leading-relaxed);
+  font-family: var(--fc-font-bangla);
+  max-width: 280px;
+}
+
+/* Attribution */
+.footer-attribution {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+}
+
+.footer-dev {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-500);
+  max-width: none;
+}
+
+.footer-dev strong {
+  color: var(--fc-gray-300);
+  font-weight: var(--fc-font-semibold);
+}
+
+.footer-org {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-1);
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-500);
+  font-family: var(--fc-font-bangla);
+  max-width: none;
+}
+
+.footer-heart {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-org-link {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-accent);
+  font-weight: var(--fc-font-medium);
+  text-decoration: none;
+  transition: color var(--fc-transition-fast);
+}
+
+.footer-org-link:hover {
+  color: var(--fc-accent-hover);
+  text-decoration: underline;
+}
+
+/* ── NAV COLUMNS ──────────────────────────────────────────── */
+.footer-nav-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+}
+
+.footer-nav-title {
+  font-size: var(--fc-text-sm);
+  font-weight: var(--fc-font-semibold);
+  color: var(--fc-gray-200);          /* Slightly lighter for headings */
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--fc-font-primary);
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+}
+
+.footer-nav-link {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-400);
+  text-decoration: none;
+  font-family: var(--fc-font-bangla);
+  transition: color var(--fc-transition-fast);
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-nav-link:hover {
+  color: var(--fc-white);
+  text-decoration: none;
+}
+
+/* ── DIVIDER ──────────────────────────────────────────────── */
+.footer-divider {
+  height: 1px;
+  background: var(--fc-gray-800);     /* Subtle divider on dark bg */
+  margin-bottom: var(--fc-space-6);
+}
+
+/* ── BOTTOM SECTION ───────────────────────────────────────── */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--fc-space-4);
+  }
+}
+
+/* Copyright */
+.footer-copyright {
+  font-size: var(--fc-text-xs);
+  color: var(--fc-gray-600);
+  max-width: none;
+}
+
+/* Language Switcher */
+.footer-language-switcher {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  flex-wrap: wrap;
+}
+
+.footer-language-label {
+  font-size: var(--fc-text-xs);
+  color: var(--fc-gray-500);
+  font-family: var(--fc-font-bangla);
+}
+
+.footer-lang-btn {
+  padding: 3px 10px;
+  border-radius: var(--fc-radius-full);
+  border: 1px solid var(--fc-gray-700);
+  background: transparent;
+  color: var(--fc-gray-400);
+  font-size: var(--fc-text-xs);
+  cursor: pointer;
+  transition:
+    background var(--fc-transition-fast),
+    color var(--fc-transition-fast),
+    border-color var(--fc-transition-fast);
+}
+
+.footer-lang-btn:hover {
+  background: var(--fc-gray-800);
+  color: var(--fc-gray-200);
+  border-color: var(--fc-gray-600);
+}
+
+.footer-lang-btn.active {
+  background: var(--fc-primary);
+  color: var(--fc-white);
+  border-color: var(--fc-primary);
+}
+
+/* Portal links */
+.footer-portals {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-4);
+}
+
+.footer-portal-link {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-1);
+  font-size: var(--fc-text-xs);
+  color: var(--fc-gray-500);
+  text-decoration: none;
+  transition: color var(--fc-transition-fast);
+}
+
+.footer-portal-link:hover {
+  color: var(--fc-gray-300);
+}
