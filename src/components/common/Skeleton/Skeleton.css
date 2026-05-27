@@ -1,0 +1,41 @@
+/* ── Skeleton Styles ──────────────────────────────────────── */
+.fc-skeleton {
+  background: var(--fc-gray-200);  /* Base gray background */
+  border-radius: var(--fc-radius-sm);
+}
+
+.skeleton-circular {
+  border-radius: var(--fc-radius-full); /* Circle for avatars */
+}
+
+.skeleton-card {
+  border-radius: var(--fc-radius-md);
+}
+
+/* Shimmer class from animations.css adds the scanning animation */
+
+.skeleton-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+}
+
+.fc-skeleton-card {
+  background: var(--fc-white);
+  border-radius: var(--fc-radius-md);
+  overflow: hidden;
+  box-shadow: var(--fc-shadow-sm);
+}
+
+.skeleton-card-content {
+  padding: var(--fc-space-3);
+  display: flex;
+  gap: var(--fc-space-3);
+}
+
+.skeleton-card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+}
