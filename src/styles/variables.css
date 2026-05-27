@@ -1,0 +1,375 @@
+/**
+ * =============================================================================
+ * FLASHCART — CSS Custom Properties (Design Tokens)
+ * =============================================================================
+ *
+ * Purpose: Central design token system for the entire FlashCart platform.
+ * All visual properties — colors, typography, spacing, shadows, radii,
+ * breakpoints, transitions — are defined here as CSS custom properties.
+ *
+ * Usage: Every component references these variables instead of hardcoded
+ * values. This ensures visual consistency and enables theme switching
+ * (e.g., dark mode) by overriding variables on :root or a parent element.
+ *
+ * Color Philosophy:
+ * - Primary: Deep dark green (#1B5E20) — trust, growth, Bangladesh's green
+ * - Accent: Bright green (#00C853) — CTAs, success, energy
+ * - Warm accent: Golden yellow (#FFD600) — ratings, highlights, premium
+ * - Neutrals: Gray scale from white to near-black for text hierarchy
+ * - Semantic: Red (danger), orange (warning), blue (info), green (success)
+ *
+ * Typography Philosophy:
+ * - Bangla: 'Hind Siliguri' — best free Bangla web font, clear at all sizes
+ * - English body: 'Inter' — designed for screens, excellent readability
+ * - Headings: 'Poppins' — geometric, modern, professional feel
+ * - Monospace: 'JetBrains Mono' — for code blocks in docs portal
+ *
+ * Developer: Rizwan Rahim Chowdhury
+ * Powered by: Bangladesh Software Development Community (BSDC)
+ * =============================================================================
+ */
+
+:root {
+  /* ======================================================================== */
+  /* COLOR PALETTE — Brand Colors                                             */
+  /* ======================================================================== */
+
+  /* Primary Green Spectrum — The soul of FlashCart's identity */
+  --color-primary: #1B5E20;          /* Deep forest green — main brand color */
+  --color-primary-hover: #245A27;    /* Slightly lighter — hover state */
+  --color-primary-light: #2E7D32;    /* Medium green — secondary actions */
+  --color-primary-lighter: #388E3C;  /* Light green — active states, borders */
+  --color-primary-pale: #E8F5E9;     /* Pale green — subtle backgrounds */
+  --color-primary-ghost: #F1F8F2;    /* Ghost green — hover backgrounds */
+  --color-primary-rgb: 27, 94, 32;   /* RGB values for rgba() usage */
+
+  /* Accent Colors — Energy and action */
+  --color-accent: #00C853;           /* Bright green — primary CTAs, success */
+  --color-accent-hover: #00B248;     /* Darker bright green — CTA hover */
+  --color-accent-light: #69F0AE;     /* Light bright green — badges */
+  --color-accent-pale: #E0F7EE;      /* Very light green — success backgrounds */
+  --color-accent-warm: #FFD600;      /* Golden yellow — star ratings */
+  --color-accent-warm-hover: #FFC400;/* Darker gold — rating hover */
+  --color-accent-warm-light: #FFF9C4;/* Pale yellow — highlight backgrounds */
+  --color-accent-warm-rgb: 255, 214, 0;
+
+  /* ======================================================================== */
+  /* COLOR PALETTE — Neutral Colors                                           */
+  /* ======================================================================== */
+
+  /* White spectrum */
+  --color-white: #FFFFFF;            /* Pure white — cards, modals */
+  --color-off-white: #F8FAF8;       /* Slightly green-tinted white — page bg */
+  --color-snow: #FAFAFA;            /* Near-white — alternate row bg */
+
+  /* Gray spectrum — 10 shades for precise text/border hierarchy */
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F5F5F5;
+  --color-gray-150: #F0F0F0;
+  --color-gray-200: #EEEEEE;
+  --color-gray-250: #E8E8E8;
+  --color-gray-300: #E0E0E0;
+  --color-gray-400: #BDBDBD;
+  --color-gray-500: #9E9E9E;
+  --color-gray-600: #757575;
+  --color-gray-700: #616161;
+  --color-gray-800: #424242;
+  --color-gray-900: #212121;
+  --color-gray-950: #1A1A1A;
+
+  /* ======================================================================== */
+  /* COLOR PALETTE — Semantic Colors                                          */
+  /* ======================================================================== */
+
+  /* Danger / Error */
+  --color-danger: #D32F2F;
+  --color-danger-hover: #C62828;
+  --color-danger-light: #FFEBEE;
+  --color-danger-border: #EF9A9A;
+  --color-danger-rgb: 211, 47, 47;
+
+  /* Warning */
+  --color-warning: #F57C00;
+  --color-warning-hover: #EF6C00;
+  --color-warning-light: #FFF3E0;
+  --color-warning-border: #FFCC80;
+
+  /* Info */
+  --color-info: #1565C0;
+  --color-info-hover: #0D47A1;
+  --color-info-light: #E3F2FD;
+  --color-info-border: #90CAF9;
+
+  /* Success (uses primary green spectrum) */
+  --color-success: #2E7D32;
+  --color-success-hover: #1B5E20;
+  --color-success-light: #E8F5E9;
+  --color-success-border: #A5D6A7;
+
+  /* ======================================================================== */
+  /* COLOR PALETTE — Text Colors                                              */
+  /* ======================================================================== */
+
+  --color-text-primary: #1A1A1A;     /* Main body text — near-black */
+  --color-text-secondary: #5F5F5F;   /* Secondary text — descriptions */
+  --color-text-tertiary: #888888;    /* Tertiary — timestamps, hints */
+  --color-text-muted: #9E9E9E;       /* Muted — disabled, placeholders */
+  --color-text-inverse: #FFFFFF;     /* White text on dark backgrounds */
+  --color-text-link: #1B5E20;        /* Link color — matches primary */
+  --color-text-link-hover: #2E7D32;  /* Link hover color */
+
+  /* ======================================================================== */
+  /* COLOR PALETTE — Surface & Border Colors                                  */
+  /* ======================================================================== */
+
+  --color-surface: #FFFFFF;          /* Card/modal surface */
+  --color-surface-raised: #FFFFFF;   /* Elevated surface */
+  --color-surface-sunken: #F5F5F5;   /* Recessed surface */
+  --color-surface-overlay: rgba(0, 0, 0, 0.5); /* Modal overlay */
+  --color-border: #E0E0E0;          /* Default border */
+  --color-border-light: #EEEEEE;    /* Light border */
+  --color-border-focus: #1B5E20;    /* Focus ring color */
+  --color-divider: #F0F0F0;         /* Section dividers */
+
+  /* ======================================================================== */
+  /* SHADOWS — Brand-tinted depth system                                      */
+  /* ======================================================================== */
+
+  /* Shadows use the primary green tint for brand consistency */
+  --shadow-xs: 0 1px 2px rgba(27, 94, 32, 0.05);
+  --shadow-sm: 0 1px 3px rgba(27, 94, 32, 0.08), 0 1px 2px rgba(27, 94, 32, 0.04);
+  --shadow-md: 0 4px 6px rgba(27, 94, 32, 0.07), 0 2px 4px rgba(27, 94, 32, 0.04);
+  --shadow-lg: 0 10px 15px rgba(27, 94, 32, 0.1), 0 4px 6px rgba(27, 94, 32, 0.05);
+  --shadow-xl: 0 20px 25px rgba(27, 94, 32, 0.1), 0 10px 10px rgba(27, 94, 32, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(27, 94, 32, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(27, 94, 32, 0.06);
+  --shadow-focus: 0 0 0 3px rgba(27, 94, 32, 0.2);  /* Focus ring shadow */
+  --shadow-card: 0 2px 8px rgba(27, 94, 32, 0.08);   /* Card default shadow */
+  --shadow-card-hover: 0 8px 24px rgba(27, 94, 32, 0.14); /* Card hover shadow */
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.12);  /* Dropdown menus */
+  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.2);     /* Modal dialogs */
+  --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.15);     /* Toast notifications */
+  --shadow-bottom-nav: 0 -2px 8px rgba(0, 0, 0, 0.08); /* Bottom navigation */
+
+  /* ======================================================================== */
+  /* TYPOGRAPHY — Font Families                                               */
+  /* ======================================================================== */
+
+  --font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', 'SolaimanLipi', sans-serif;
+  --font-english: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Poppins', 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Default font (Bangla-first for Bangladesh audience) */
+  --font-primary: var(--font-bangla);
+  --font-secondary: var(--font-english);
+
+  /* ======================================================================== */
+  /* TYPOGRAPHY — Font Sizes (Modular Scale 1.25 ratio)                       */
+  /* ======================================================================== */
+
+  --text-2xs: 0.625rem;    /* 10px — fine print, badges */
+  --text-xs: 0.75rem;      /* 12px — captions, labels */
+  --text-sm: 0.8125rem;    /* 13px — small body text */
+  --text-base: 0.875rem;   /* 14px — default body text (mobile-first) */
+  --text-md: 0.9375rem;    /* 15px — slightly larger body */
+  --text-lg: 1rem;         /* 16px — emphasized body */
+  --text-xl: 1.125rem;     /* 18px — section headers */
+  --text-2xl: 1.25rem;     /* 20px — card titles */
+  --text-3xl: 1.5rem;      /* 24px — page sub-headers */
+  --text-4xl: 1.75rem;     /* 28px — page headers */
+  --text-5xl: 2rem;        /* 32px — hero sub-title */
+  --text-6xl: 2.5rem;      /* 40px — hero main title */
+  --text-7xl: 3rem;        /* 48px — large display text */
+
+  /* ======================================================================== */
+  /* TYPOGRAPHY — Font Weights                                                */
+  /* ======================================================================== */
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* ======================================================================== */
+  /* TYPOGRAPHY — Line Heights                                                */
+  /* ======================================================================== */
+
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --leading-loose: 1.8;
+  --leading-extra-loose: 2;
+
+  /* ======================================================================== */
+  /* TYPOGRAPHY — Letter Spacing                                              */
+  /* ======================================================================== */
+
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ======================================================================== */
+  /* SPACING — 4px Base Scale                                                 */
+  /* ======================================================================== */
+
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-3-5: 14px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-18: 72px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-28: 112px;
+  --space-32: 128px;
+
+  /* ======================================================================== */
+  /* BORDER RADIUS                                                             */
+  /* ======================================================================== */
+
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-default: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+  --radius-5xl: 32px;
+  --radius-full: 9999px;
+
+  /* ======================================================================== */
+  /* Z-INDEX SCALE — Layering system                                          */
+  /* ======================================================================== */
+
+  --z-below: -1;
+  --z-base: 0;
+  --z-raised: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 300;
+  --z-sidebar: 400;
+  --z-overlay: 500;
+  --z-modal: 600;
+  --z-popover: 700;
+  --z-toast: 800;
+  --z-tooltip: 900;
+  --z-max: 9999;
+
+  /* ======================================================================== */
+  /* TRANSITIONS — Animation timing                                           */
+  /* ======================================================================== */
+
+  --transition-fastest: 100ms;
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
+  --transition-slow: 300ms;
+  --transition-slower: 400ms;
+  --transition-slowest: 500ms;
+
+  /* Easing functions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Common transition shorthand */
+  --transition-colors: color var(--transition-normal) var(--ease-in-out),
+                       background-color var(--transition-normal) var(--ease-in-out),
+                       border-color var(--transition-normal) var(--ease-in-out);
+  --transition-transform: transform var(--transition-normal) var(--ease-out);
+  --transition-shadow: box-shadow var(--transition-normal) var(--ease-in-out);
+  --transition-all: all var(--transition-normal) var(--ease-in-out);
+  --transition-opacity: opacity var(--transition-normal) var(--ease-in-out);
+
+  /* ======================================================================== */
+  /* LAYOUT — Widths & Containers                                             */
+  /* ======================================================================== */
+
+  --container-xs: 420px;
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-2xl: 1320px;
+  --container-full: 100%;
+
+  /* Content max widths */
+  --content-narrow: 680px;     /* Blog/docs reading width */
+  --content-medium: 960px;     /* Dashboard content */
+  --content-wide: 1200px;      /* Full-width layouts */
+
+  /* ======================================================================== */
+  /* LAYOUT — Header & Navigation Heights                                     */
+  /* ======================================================================== */
+
+  --header-height-mobile: 56px;
+  --header-height-desktop: 64px;
+  --bottom-nav-height: 64px;
+  --sidebar-width: 260px;
+  --sidebar-width-collapsed: 72px;
+
+  /* ======================================================================== */
+  /* BREAKPOINTS — Mobile-First (for reference in JS, actual breakpoints      */
+  /* are used via @media queries in layout.css)                               */
+  /* ======================================================================== */
+
+  --bp-xs: 320px;
+  --bp-sm: 375px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* ======================================================================== */
+  /* MISCELLANEOUS                                                             */
+  /* ======================================================================== */
+
+  /* Overlay */
+  --overlay-light: rgba(0, 0, 0, 0.3);
+  --overlay-medium: rgba(0, 0, 0, 0.5);
+  --overlay-dark: rgba(0, 0, 0, 0.7);
+
+  /* Scrollbar */
+  --scrollbar-width: 6px;
+  --scrollbar-track: var(--color-gray-100);
+  --scrollbar-thumb: var(--color-gray-400);
+  --scrollbar-thumb-hover: var(--color-gray-500);
+
+  /* Input heights */
+  --input-height-sm: 32px;
+  --input-height-md: 40px;
+  --input-height-lg: 48px;
+  --input-height-xl: 56px;
+
+  /* Border widths */
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+}
