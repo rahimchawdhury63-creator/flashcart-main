@@ -1,0 +1,98 @@
+/* ============================================================
+   FlashCart — Breadcrumb Component Styles
+   Compact, readable breadcrumb navigation.
+   ============================================================ */
+
+/* ── BREADCRUMB CONTAINER ─────────────────────────────────── */
+.fc-breadcrumb {
+  /* Full width container */
+  width: 100%;
+  /* Padding for breathing room */
+  padding: var(--fc-space-3) 0;
+}
+
+/* ── BREADCRUMB LIST ──────────────────────────────────────── */
+.breadcrumb-list {
+  /* Horizontal flex layout */
+  display: flex;
+  flex-wrap: wrap;               /* Allow wrapping on small screens */
+  align-items: center;
+  gap: var(--fc-space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── BREADCRUMB ITEM ──────────────────────────────────────── */
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-1);
+  /* Prevent font size from making layout jump */
+  line-height: 1;
+}
+
+/* ── BREADCRUMB LINK ──────────────────────────────────────── */
+.breadcrumb-link {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-500);
+  font-weight: var(--fc-font-normal);
+  text-decoration: none;
+  /* Smooth color transition on hover */
+  transition: color var(--fc-transition-fast);
+  /* Prevent overflow on very long store names */
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumb-link:hover {
+  color: var(--fc-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.breadcrumb-link:focus-visible {
+  outline: 2px solid var(--fc-primary-light);
+  outline-offset: 2px;
+  border-radius: var(--fc-radius-sm);
+}
+
+/* ── CURRENT PAGE ─────────────────────────────────────────── */
+.breadcrumb-current {
+  font-size: var(--fc-text-sm);
+  /* Slightly darker than links — it's the current page */
+  color: var(--fc-gray-700);
+  font-weight: var(--fc-font-medium);
+  /* Also truncate if too long */
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── SEPARATOR ────────────────────────────────────────────── */
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+  color: var(--fc-gray-300);
+  flex-shrink: 0;               /* Never shrink the separator */
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Smaller text on mobile */
+  .breadcrumb-link,
+  .breadcrumb-current {
+    font-size: var(--fc-text-xs);
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 360px) {
+  .breadcrumb-link,
+  .breadcrumb-current {
+    max-width: 100px;
+  }
+}
