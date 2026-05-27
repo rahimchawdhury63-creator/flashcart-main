@@ -1,0 +1,189 @@
+/* ============================================================
+   FlashCart — Register Page Styles
+   Extends Login.css styles with registration-specific additions.
+   Import Login.css is not needed — both share auth-page class.
+   ============================================================ */
+
+/* ── REUSE LOGIN STYLES ───────────────────────────────────── */
+/* All .auth-page, .auth-branding, .auth-form-panel styles  */
+/* are defined in Login.css and apply here too since         */
+/* both pages use the same CSS class names.                  */
+/* Register-specific styles are added below.                 */
+
+/* ── PASSWORD FIELD WRAPPER ───────────────────────────────── */
+/* Wraps input + strength meter as a unit */
+.password-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+}
+
+/* ── PASSWORD STRENGTH METER ──────────────────────────────── */
+.password-strength-meter {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-3);
+}
+
+/* The bar track — grey background */
+.strength-bar-track {
+  flex: 1;
+  height: 4px;
+  background: var(--fc-gray-200);
+  border-radius: var(--fc-radius-full);
+  overflow: hidden;             /* Clip the fill to rounded corners */
+}
+
+/* The colored fill — width and color controlled by JS */
+.strength-bar-fill {
+  height: 100%;
+  border-radius: var(--fc-radius-full);
+  /* Smooth color and width transitions as user types */
+  transition:
+    width var(--fc-transition-base),
+    background-color var(--fc-transition-base);
+}
+
+/* Strength label text */
+.strength-label {
+  font-size: var(--fc-text-xs);
+  font-weight: var(--fc-font-semibold);
+  white-space: nowrap;
+  min-width: 70px;              /* Consistent width for label */
+  text-align: right;
+  transition: color var(--fc-transition-base);
+}
+
+/* ── PASSWORD HINT ────────────────────────────────────────── */
+/* Shown before user starts typing password */
+.password-hint {
+  font-size: var(--fc-text-xs);
+  color: var(--fc-gray-400);
+  line-height: var(--fc-leading-relaxed);
+  font-family: var(--fc-font-bangla);
+  max-width: none;
+}
+
+/* ── TERMS SECTION ────────────────────────────────────────── */
+.terms-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+}
+
+.terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fc-space-2);
+  cursor: pointer;
+}
+
+.terms-checkbox {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;              /* Align with first line of text */
+  accent-color: var(--fc-primary);
+  cursor: pointer;
+}
+
+.terms-text {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-600);
+  line-height: var(--fc-leading-relaxed);
+  font-family: var(--fc-font-bangla);
+}
+
+.terms-link {
+  color: var(--fc-primary-light);
+  font-weight: var(--fc-font-medium);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.terms-link:hover {
+  color: var(--fc-primary);
+}
+
+.terms-error {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-1);
+  font-size: var(--fc-text-xs);
+  color: var(--fc-error);
+  font-weight: var(--fc-font-medium);
+  margin: 0;
+  animation: slideInDown var(--fc-duration-150) var(--fc-ease-out);
+}
+
+/* ── SUCCESS PAGE ─────────────────────────────────────────── */
+.auth-success-page {
+  background: var(--fc-gray-50);
+}
+
+.auth-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--fc-space-8) var(--fc-space-6);
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Animated checkmark container */
+.auth-success-icon {
+  margin-bottom: var(--fc-space-6);
+  animation: scaleInSpring var(--fc-duration-500) both;
+}
+
+.auth-success-title {
+  font-size: var(--fc-text-2xl);
+  font-weight: var(--fc-font-bold);
+  color: var(--fc-gray-900);
+  margin-bottom: var(--fc-space-4);
+  font-family: var(--fc-font-bangla);
+}
+
+.auth-success-message {
+  font-size: var(--fc-text-base);
+  color: var(--fc-gray-600);
+  line-height: var(--fc-leading-relaxed);
+  margin-bottom: var(--fc-space-4);
+  font-family: var(--fc-font-bangla);
+  max-width: none;
+}
+
+.auth-success-message strong {
+  color: var(--fc-primary);
+  word-break: break-all;
+}
+
+.auth-success-note {
+  font-size: var(--fc-text-sm);
+  color: var(--fc-gray-400);
+  margin-bottom: var(--fc-space-6);
+  font-family: var(--fc-font-bangla);
+  max-width: none;
+}
+
+/* ── VERY SMALL SCREENS ───────────────────────────────────── */
+@media (max-width: 360px) {
+  .password-strength-meter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--fc-space-1);
+  }
+
+  .strength-bar-track {
+    width: 100%;
+  }
+
+  .strength-label {
+    text-align: left;
+    min-width: auto;
+  }
+}
