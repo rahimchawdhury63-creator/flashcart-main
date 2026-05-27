@@ -1,0 +1,51 @@
+# ============================================================
+# FlashCart .gitignore
+# Prevents sensitive and generated files from being committed
+# ============================================================
+
+# Environment variables — CRITICAL: never commit these
+# Contains Firebase keys and other sensitive configuration
+.env
+.env.local
+.env.development
+.env.production
+.env.*.local
+
+# Vite build output — generated on each build, not needed in repo
+dist/
+dist-ssr/
+
+# Node modules — installed from package.json, not committed
+node_modules/
+
+# Vite cache — development cache files
+.vite/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
