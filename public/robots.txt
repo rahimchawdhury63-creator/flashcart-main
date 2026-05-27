@@ -1,0 +1,90 @@
+# ============================================================
+# FlashCart — Main Customer Portal
+# Robots.txt — Instructions for web crawlers
+# Developer: Rizwan Rahim Chowdhury
+# Powered by: Bangladesh Software Development Community
+# ============================================================
+
+# Allow all well-behaved robots
+User-agent: *
+
+# Allow everything by default — FlashCart is public
+Allow: /
+
+# Disallow private/personal user pages
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order/
+Disallow: /orders/
+Disallow: /profile/
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Disallow: /verify-email
+Disallow: /forgot-password
+
+# Disallow search result pages with filters
+# (prevents duplicate content from filter combinations)
+Disallow: /search?
+
+# Allow main search page
+Allow: /search$
+
+# Allow all store pages — these are key SEO pages
+Allow: /store/
+Allow: /category/
+Allow: /area/
+
+# Sitemap location
+Sitemap: https://flashcart.bsdc.info.bd/sitemap.xml
+
+# Crawl delay — be respectful to our hosting
+Crawl-delay: 1
+
+# ── SPECIFIC BOT RULES ────────────────────────────────────
+
+# Googlebot — full access (most important crawler)
+User-agent: Googlebot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order/
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Crawl-delay: 0
+
+# Google image bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Facebook crawler (for OG preview)
+User-agent: facebookexternalhit
+Allow: /
+
+# WhatsApp link preview crawler
+User-agent: WhatsApp
+Allow: /
+
+# Twitter/X crawler
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn crawler
+User-agent: LinkedInBot
+Allow: /
+
+# Block aggressive/harmful bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
