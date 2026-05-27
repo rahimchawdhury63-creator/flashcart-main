@@ -1,0 +1,40 @@
+{
+  "name": "flashcart-main",
+  "private": true,
+  "version": "1.0.0",
+  "description": "FlashCart - Bangladesh's first free, world-class, all-in-one Cash-on-Delivery delivery platform. Customer-facing portal for ordering food, groceries, medicine, and more.",
+  "author": "Rizwan Rahim Chowdhury",
+  "homepage": "https://flashcart.bsdc.info.bd",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "react-helmet-async": "^2.0.5",
+    "firebase": "^10.14.1",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^5.4.10"
+  },
+  "keywords": [
+    "flashcart",
+    "bangladesh",
+    "delivery",
+    "food-delivery",
+    "cod",
+    "cash-on-delivery",
+    "ecommerce",
+    "bsdc"
+  ],
+  "license": "MIT"
+}
