@@ -1,0 +1,447 @@
+/**
+ * =============================================================================
+ * FLASHCART — Login Page Styles
+ * =============================================================================
+ *
+ * Mobile-first, fully responsive layout with split-screen design on desktop.
+ *
+ * Developer: Rizwan Rahim Chowdhury
+ * =============================================================================
+ */
+
+/* =========================================================================== */
+/* AUTH PAGE LAYOUT (Shared with Register, ForgotPassword)                     */
+/* =========================================================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-off-white);
+}
+
+/* --- Auth Form Container --- */
+.auth-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .auth-container {
+    padding: var(--space-10) var(--space-8);
+    max-width: 520px;
+  }
+}
+
+/* --- Header (Logo + Title) --- */
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  width: 100%;
+}
+
+.auth-logo {
+  display: inline-flex;
+  margin-bottom: var(--space-4);
+  transition: transform var(--transition-fast);
+}
+
+.auth-logo:hover {
+  transform: scale(1.05);
+}
+
+.auth-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: var(--tracking-tight);
+}
+
+.auth-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* --- Error Message --- */
+.auth-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-danger-light);
+  border: var(--border-width-thin) solid var(--color-danger-border);
+  border-radius: var(--radius-default);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+  width: 100%;
+  animation: shake 0.4s var(--ease-in-out);
+}
+
+.auth-error svg {
+  flex-shrink: 0;
+}
+
+/* --- Divider --- */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-5) 0;
+  width: 100%;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-divider);
+}
+
+.auth-divider span {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  white-space: nowrap;
+}
+
+/* --- Form --- */
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* --- Form Input with Icon --- */
+.form-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-input-icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-input {
+  width: 100%;
+  height: var(--input-height-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  font-family: var(--font-primary);
+  background-color: var(--color-white);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-default);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.form-input-with-icon {
+  padding-left: 44px;
+  padding-right: 44px;
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.form-input:focus + .form-input-icon,
+.form-input-wrapper:focus-within .form-input-icon {
+  color: var(--color-primary);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-input:disabled {
+  background-color: var(--color-gray-100);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* --- Password Show/Hide Toggle --- */
+.form-input-toggle {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-input-toggle:hover {
+  color: var(--color-text-secondary);
+  background-color: var(--color-gray-100);
+}
+
+.form-input-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* --- Form Row (checkbox + link) --- */
+.auth-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.auth-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+/* --- Links --- */
+.auth-link {
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.auth-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.auth-link-bold {
+  font-weight: var(--weight-semibold);
+}
+
+/* --- Footer --- */
+.auth-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border-width-thin) solid var(--color-divider);
+  width: 100%;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.auth-brand-footer {
+  margin-top: var(--space-6);
+  text-align: center;
+  font-size: var(--text-2xs);
+  color: var(--color-text-muted);
+}
+
+.auth-brand-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  margin-left: var(--space-1);
+}
+
+.auth-brand-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================================== */
+/* GOOGLE SIGN-IN BUTTON                                                       */
+/* =========================================================================== */
+
+.google-signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: var(--input-height-lg);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  background-color: var(--color-white);
+  color: var(--color-text-primary);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.google-signin-btn:hover:not(:disabled) {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-400);
+  box-shadow: var(--shadow-sm);
+}
+
+.google-signin-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.google-signin-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.google-signin-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.google-signin-icon {
+  flex-shrink: 0;
+}
+
+.google-signin-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-gray-300);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+.google-signin-label {
+  flex-shrink: 0;
+}
+
+/* =========================================================================== */
+/* DECORATION SIDEBAR (Desktop only)                                           */
+/* =========================================================================== */
+
+.auth-decoration {
+  display: none;
+  flex: 1;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-lighter) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-decoration::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.auth-decoration::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,200,83,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.auth-decoration-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--space-10);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.auth-decoration-title {
+  font-size: var(--text-6xl);
+  font-weight: var(--weight-extrabold);
+  margin: var(--space-5) 0 var(--space-3);
+  letter-spacing: var(--tracking-tight);
+}
+
+.auth-decoration-text {
+  font-size: var(--text-lg);
+  opacity: 0.9;
+  margin-bottom: var(--space-8);
+  max-width: 400px;
+  line-height: var(--leading-relaxed);
+}
+
+.auth-decoration-features {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.auth-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.auth-feature-icon {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  background: rgba(255,255,255,0.15);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.auth-feature-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  opacity: 0.85;
+  font-weight: var(--weight-medium);
+}
+
+/* Show decoration on desktop only */
+@media (min-width: 1024px) {
+  .auth-decoration {
+    display: block;
+  }
+}
