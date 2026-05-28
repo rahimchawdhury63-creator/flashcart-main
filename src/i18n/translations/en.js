@@ -607,5 +607,21 @@ const en = {
     offlineMessage: 'Some features may not be available while you\'re offline'
   }
 };
-
+/* ===== ADD TO en.js auth.errors ===== */
+errors: {
+  // ... existing errors ...
+  invalidName: 'Please enter your full name',
+  userDisabled: 'This account has been disabled. Please contact support',
+  operationNotAllowed: 'This operation is not allowed',
+  popupClosed: 'Sign-in popup was closed. Please try again',
+  popupBlocked: 'Sign-in popup was blocked. Please allow popups for this site',
+  accountExists: 'An account already exists with this email using a different sign-in method',
+  credentialInUse: 'This credential is already associated with another account',
+  invalidCredential: 'Invalid credentials. Please try again',
+  invalidVerificationCode: 'Invalid verification code',
+  missingVerificationCode: 'Verification code is required',
+  requiresRecentLogin: 'This action requires a recent login. Please sign in again',
+  acceptTermsRequired: 'You must accept the Terms of Service to continue',
+  notLoggedIn: 'You must be logged in to perform this action'
+}
 export default en;
