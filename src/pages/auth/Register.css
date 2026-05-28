@@ -1,0 +1,38 @@
+/**
+ * =============================================================================
+ * FLASHCART — Register Page Styles
+ * =============================================================================
+ *
+ * Reuses Login.css base styles, adds registration-specific tweaks.
+ *
+ * Developer: Rizwan Rahim Chowdhury
+ * =============================================================================
+ */
+
+/* Terms checkbox spacing */
+.auth-terms {
+  margin: var(--space-3) 0;
+  align-items: flex-start;
+  line-height: var(--leading-relaxed);
+}
+
+.auth-terms input[type="checkbox"] {
+  margin-top: 3px;
+}
+
+.auth-terms span {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Form group with strength meter has extra bottom space */
+.form-group:has(.password-strength-meter) {
+  margin-bottom: var(--space-3);
+}
+
+/* Slightly more compact form for register page (more fields) */
+@media (max-width: 767px) {
+  .auth-form {
+    gap: var(--space-3-5);
+  }
+}
