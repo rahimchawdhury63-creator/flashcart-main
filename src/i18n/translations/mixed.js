@@ -613,5 +613,22 @@ const mixed = {
     offlineMessage: 'Offline-এ কিছু feature available নাও হতে পারে'
   }
 };
+/* ===== ADD TO mixed.js auth.errors ===== */
+errors: {
+  // ... existing errors ...
+  invalidName: 'আপনার পুরো নাম লিখুন',
+  userDisabled: 'এই account disable করা হয়েছে। Support-এ contact করুন',
+  operationNotAllowed: 'এই operation allowed নয়',
+  popupClosed: 'Sign-in popup বন্ধ হয়েছে। আবার try করুন',
+  popupBlocked: 'Sign-in popup blocked হয়েছে। এই site-এর জন্য popup allow করুন',
+  accountExists: 'এই email-এ অন্য sign-in method দিয়ে একটি account ইতিমধ্যে আছে',
+  credentialInUse: 'এই credential অন্য একটি account-এর সাথে associated',
+  invalidCredential: 'Invalid credentials। আবার try করুন',
+  invalidVerificationCode: 'Invalid verification code',
+  missingVerificationCode: 'Verification code প্রয়োজন',
+  requiresRecentLogin: 'এই action-এর জন্য recent login প্রয়োজন। আবার sign in করুন',
+  acceptTermsRequired: 'Continue করতে আপনাকে Terms of Service accept করতে হবে',
+  notLoggedIn: 'এই action perform করতে আপনাকে logged in থাকতে হবে'
+}
 
 export default mixed;
