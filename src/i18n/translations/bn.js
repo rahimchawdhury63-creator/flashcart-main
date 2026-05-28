@@ -607,5 +607,21 @@ const bn = {
     offlineMessage: 'অফলাইনে কিছু ফিচার উপলব্ধ নাও হতে পারে'
   }
 };
-
+/* ===== ADD TO bn.js auth.errors ===== */
+errors: {
+  // ... existing errors ...
+  invalidName: 'আপনার পুরো নাম লিখুন',
+  userDisabled: 'এই অ্যাকাউন্ট নিষ্ক্রিয় করা হয়েছে। সাপোর্টে যোগাযোগ করুন',
+  operationNotAllowed: 'এই অপারেশন অনুমোদিত নয়',
+  popupClosed: 'সাইন-ইন পপআপ বন্ধ হয়েছে। আবার চেষ্টা করুন',
+  popupBlocked: 'সাইন-ইন পপআপ ব্লক করা হয়েছে। এই সাইটের জন্য পপআপ অনুমতি দিন',
+  accountExists: 'এই ইমেইলে অন্য সাইন-ইন পদ্ধতি দিয়ে একটি অ্যাকাউন্ট ইতিমধ্যে আছে',
+  credentialInUse: 'এই ক্রেডেনশিয়াল অন্য একটি অ্যাকাউন্টের সাথে যুক্ত',
+  invalidCredential: 'অবৈধ ক্রেডেনশিয়াল। আবার চেষ্টা করুন',
+  invalidVerificationCode: 'অবৈধ যাচাইকরণ কোড',
+  missingVerificationCode: 'যাচাইকরণ কোড প্রয়োজন',
+  requiresRecentLogin: 'এই অ্যাকশনের জন্য সাম্প্রতিক লগইন প্রয়োজন। আবার সাইন ইন করুন',
+  acceptTermsRequired: 'চালিয়ে যেতে আপনাকে সেবার শর্তাবলী মানতে হবে',
+  notLoggedIn: 'এই অ্যাকশন করতে আপনাকে লগইন থাকতে হবে'
+}
 export default bn;
