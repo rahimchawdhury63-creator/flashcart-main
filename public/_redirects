@@ -1,9 +1,0 @@
-# =============================================================================
-# CLOUDFLARE PAGES SPA REDIRECT
-# =============================================================================
-# This file ensures that all routes are handled by index.html (SPA routing).
-# Without this, refreshing any page other than '/' would show a 404.
-# Cloudflare Pages reads this file and applies the redirect rules.
-# =============================================================================
-
-/* /index.html 200
