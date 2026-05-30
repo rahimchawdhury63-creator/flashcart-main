@@ -1,0 +1,12 @@
+/* fabric-overrides.css — Customizations layered on top of Fabric CSS utilities.
+   FlashCart uses its own design tokens, so we normalize a few Fabric defaults
+   to match the brand. Keep this file lightweight. */
+
+/* Ensure links inside Fabric components inherit our brand color. */
+.ms-Fabric a { color: var(--color-primary); }
+
+/* Brand-aligned focus ring for accessibility across Fabric controls. */
+.ms-Fabric :focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

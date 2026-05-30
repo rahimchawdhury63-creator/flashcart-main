@@ -1,0 +1,37 @@
+/* responsive.css — Mobile-first breakpoints. */
+
+/* Tablet and up (>=768px) */
+@media (min-width: 768px) {
+  .grid-stores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-cards {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .container { padding: 0 var(--sp-3); }
+  /* Bottom mobile nav hidden on larger screens. */
+  .mobile-nav { display: none; }
+  .page { padding-bottom: var(--sp-4); }
+}
+
+/* Small laptop and up (>=1024px) */
+@media (min-width: 1024px) {
+  .grid-stores {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* Desktop header search is shown; mobile search row hidden. */
+  .mobile-only { display: none; }
+}
+
+/* Desktop (>=1280px) */
+@media (min-width: 1280px) {
+  .grid-stores {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Show desktop-only items only on >=768px */
+.desktop-only { display: none; }
+@media (min-width: 768px) {
+  .desktop-only { display: flex; }
+}

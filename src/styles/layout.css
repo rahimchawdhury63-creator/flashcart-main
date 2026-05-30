@@ -1,0 +1,81 @@
+/* layout.css — Layout primitives: container, grid, flex helpers, sections. */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/* Centered content container. */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-2);
+}
+
+/* Main content gets bottom padding so the mobile nav doesn't cover it. */
+.page {
+  min-height: calc(100vh - var(--header-h));
+  padding-bottom: calc(var(--mobilenav-h) + var(--sp-3));
+}
+
+/* Vertical section spacing. */
+.section {
+  padding: var(--sp-3) 0;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+  gap: var(--sp-2);
+}
+
+/* Flex helpers. */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+.gap-1 { gap: var(--sp-1); }
+.gap-2 { gap: var(--sp-2); }
+.gap-3 { gap: var(--sp-3); }
+
+/* Responsive grids. */
+.grid { display: grid; gap: var(--sp-2); }
+.grid-cards {
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+.grid-stores {
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-columns: 1fr;
+}
+.grid-categories {
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+
+/* Utility spacing. */
+.mt-1 { margin-top: var(--sp-1); }
+.mt-2 { margin-top: var(--sp-2); }
+.mt-3 { margin-top: var(--sp-3); }
+.mb-1 { margin-bottom: var(--sp-1); }
+.mb-2 { margin-bottom: var(--sp-2); }
+.mb-3 { margin-bottom: var(--sp-3); }
+.hidden { display: none; }

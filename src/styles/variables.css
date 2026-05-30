@@ -1,0 +1,58 @@
+/* variables.css — Design tokens (CSS custom properties) for FlashCart.
+   Centralizes colors, typography, spacing, radii and shadows so the whole
+   UI stays consistent and themeable. */
+
+:root {
+  /* Brand colors */
+  --color-primary: #1a6b3c;        /* Dark green */
+  --color-primary-dark: #145230;
+  --color-primary-light: #2e8b57;
+  --color-secondary: #ffffff;       /* Pure white */
+  --color-accent: #f4a823;          /* Golden amber — CTAs/highlights */
+  --color-accent-dark: #d98e0f;
+
+  /* Surfaces */
+  --color-bg: #f8faf9;              /* Off-white green tint */
+  --color-bg-dark: #0d1f16;         /* Very dark green — headers/footers */
+  --color-card: #ffffff;
+
+  /* Text */
+  --color-text: #1a1a1a;
+  --color-text-secondary: #4a5568;
+  --color-text-light: #718096;
+  --color-text-on-dark: #e8f0ea;
+
+  /* Borders & states */
+  --color-border: #e2e8f0;
+  --color-success: #38a169;
+  --color-warning: #d69e2e;
+  --color-error: #e53e3e;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(26, 107, 60, 0.08);
+  --shadow: 0 4px 12px rgba(26, 107, 60, 0.12);
+  --shadow-lg: 0 8px 28px rgba(26, 107, 60, 0.18);
+
+  /* Typography */
+  --font-primary: 'Inter', 'Hind Siliguri', system-ui, sans-serif;
+  --font-bangla: 'Hind Siliguri', 'Inter', sans-serif;
+  --fs-base: 16px;
+
+  /* Radii */
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-pill: 24px;
+
+  /* Spacing (8px base scale) */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-5: 40px;
+  --sp-6: 48px;
+
+  /* Layout */
+  --container-max: 1200px;
+  --header-h: 64px;
+  --mobilenav-h: 60px;
+}
