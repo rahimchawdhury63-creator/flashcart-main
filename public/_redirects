@@ -1,0 +1,7 @@
+# Cloudflare Pages SPA routing — SEO-SAFE VERSION.
+# Serve index.html for every route with an HTTP 200 status (NOT 404).
+# This fixes Google Search Console "Failed: Not found (404)" on /store/* and /store/*/item/* URLs.
+# (The old public/404.html technique returned a 404 status, which blocked indexing.)
+/*    /index.html    200
+
+
