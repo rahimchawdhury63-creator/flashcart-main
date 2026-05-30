@@ -1,43 +1,39 @@
-// App.jsx — Partner Portal root: providers, protected routing, shell, notifications.
+// App.jsx — Root component: providers, router, layout shell and lazy-loaded routes.
 
 import React, { Suspense, lazy, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 
 import { LanguageProvider } from './contexts/LanguageContext'
 import { AuthProvider } from './contexts/AuthContext'
-import { NotificationProvider } from './contexts/NotificationContext'
-import { OrderProvider } from './contexts/OrderContext'
+import { CartProvider } from './contexts/CartContext'
+import { LocationProvider } from './contexts/LocationContext'
 
-import PartnerSidebar from './components/layout/PartnerSidebar'
-import PartnerHeader from './components/layout/PartnerHeader'
-import PartnerMobileNav from './components/layout/PartnerMobileNav'
-import NotificationBanner from './components/layout/NotificationBanner'
-import PermissionPrompt from './components/common/PermissionPrompt'
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import MobileNav from './components/layout/MobileNav'
 import ErrorBoundary from './components/common/ErrorBoundary'
 import LoadingSpinner from './components/common/LoadingSpinner'
-import { useAuth } from './hooks/useAuth'
 
-// Lazy-loaded pages (route-based code splitting).
-const DashboardPage = lazy(() => import('./pages/DashboardPage'))
+// Route-based code splitting: each page loads only when visited (better LCP).
+const HomePage = lazy(() => import('./pages/HomePage'))
+const StoresPage = lazy(() => import('./pages/StoresPage'))
+const StorePage = lazy(() => import('./pages/StorePage'))
+const ItemPage = lazy(() => import('./pages/ItemPage'))
+const CategoryPage = lazy(() => import('./pages/CategoryPage'))
+const SearchPage = lazy(() => import('./pages/SearchPage'))
+const CartPage = lazy(() => import('./pages/CartPage'))
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'))
+const OrderPage = lazy(() => import('./pages/OrderPage'))
 const OrdersPage = lazy(() => import('./pages/OrdersPage'))
-const OrderDetailPage = lazy(() => import('./pages/OrderDetailPage'))
-const MenuPage = lazy(() => import('./pages/MenuPage'))
-const AddItemPage = lazy(() => import('./pages/AddItemPage'))
-const EditItemPage = lazy(() => import('./pages/EditItemPage'))
-const SettingsPage = lazy(() => import('./pages/SettingsPage'))
-const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage'))
-const CertificatesPage = lazy(() => import('./pages/CertificatesPage'))
-const ReviewsPage = lazy(() => import('./pages/ReviewsPage'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage'))
-const GuidePage = lazy(() => import('./pages/GuidePage'))
-const NotificationsPage = lazy(() => import('./pages/NotificationsPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const SignupPage = lazy(() => import('./pages/SignupPage'))
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
 
-// Legacy safety net for any cached sessionStorage redirect. Routing now uses
-// public/_redirects (200 rewrite), so this is a no-op for fresh sessions.
+// Handles the Cloudflare Pages 404.html SPA redirect technique.
+// 404.html stores the original path in sessionStorage; we restore it here.
 function RedirectHandler() {
   const navigate = useNavigate()
   useEffect(() => {
@@ -50,104 +46,64 @@ function RedirectHandler() {
   return null
 }
 
-// Scroll to top on route change.
+// Scrolls to top whenever the route path changes (better UX on mobile).
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' })
+  }, [pathname])
   return null
-}
-
-// Maps the current path to a header title.
-function useTitle() {
-  const { pathname } = useLocation()
-  if (pathname.startsWith('/orders')) return 'Orders'
-  if (pathname.startsWith('/menu')) return 'Menu'
-  if (pathname.startsWith('/settings')) return 'Settings'
-  if (pathname.startsWith('/analytics')) return 'Analytics'
-  if (pathname.startsWith('/certificates')) return 'Certificates'
-  if (pathname.startsWith('/reviews')) return 'Reviews'
-  if (pathname.startsWith('/profile')) return 'Profile'
-  if (pathname.startsWith('/notifications')) return 'Notifications'
-  if (pathname.startsWith('/guide')) return 'Setup Guide'
-  return 'Dashboard'
-}
-
-// The authenticated app shell with sidebar + content + live notifications.
-function PartnerShell() {
-  const title = useTitle()
-  return (
-    <OrderProvider>
-      <NotificationProvider>
-        <div className="partner-shell">
-          <PartnerSidebar />
-          <div className="partner-content">
-            <PartnerHeader title={title} />
-            <NotificationBanner />
-            <Suspense fallback={<LoadingSpinner large label="Loading..." />}>
-              <Routes>
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/orders" element={<OrdersPage />} />
-                <Route path="/orders/:orderId" element={<OrderDetailPage />} />
-                <Route path="/menu" element={<MenuPage />} />
-                <Route path="/menu/add-item" element={<AddItemPage />} />
-                <Route path="/menu/edit-item/:itemId" element={<EditItemPage />} />
-                <Route path="/settings" element={<SettingsPage />} />
-                <Route path="/analytics" element={<AnalyticsPage />} />
-                <Route path="/certificates" element={<CertificatesPage />} />
-                <Route path="/reviews" element={<ReviewsPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/guide" element={<GuidePage />} />
-                <Route path="/notifications" element={<NotificationsPage />} />
-                <Route path="*" element={<Navigate to="/dashboard" replace />} />
-              </Routes>
-            </Suspense>
-          </div>
-          <PartnerMobileNav />
-        </div>
-        {/* Persistent permission prompt loop (re-asks until enabled). */}
-        <PermissionPrompt />
-      </NotificationProvider>
-    </OrderProvider>
-  )
-}
-
-// Gatekeeper: shows auth pages when logged out, the shell when logged in.
-function Gate() {
-  const { isLoggedIn, loading } = useAuth()
-  if (loading) return <LoadingSpinner large label="Loading..." />
-  if (!isLoggedIn) {
-    return (
-      <Suspense fallback={<LoadingSpinner large />}>
-        <Routes>
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="*" element={<LoginPage />} />
-        </Routes>
-      </Suspense>
-    )
-  }
-  return <PartnerShell />
 }
 
 export default function App() {
   return (
     <HelmetProvider>
+      {/* Context providers wrap the whole tree. */}
       <LanguageProvider>
         <AuthProvider>
-          <BrowserRouter>
-            <RedirectHandler />
-            <ScrollToTop />
-            <ErrorBoundary>
-              <Gate />
-            </ErrorBoundary>
-            <Toaster
-              position="top-center"
-              toastOptions={{
-                style: { fontFamily: 'var(--font-primary)', fontSize: '0.9rem' },
-                success: { iconTheme: { primary: '#1a6b3c', secondary: '#fff' } },
-              }}
-            />
-          </BrowserRouter>
+          <LocationProvider>
+            <CartProvider>
+              <BrowserRouter>
+                <RedirectHandler />
+                <ScrollToTop />
+                <ErrorBoundary>
+                  <Header />
+                  {/* Suspense fallback shows while a lazy page chunk loads. */}
+                  <Suspense fallback={<LoadingSpinner large label="Loading..." />}>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/stores" element={<StoresPage />} />
+                      <Route path="/store/:storeSlug" element={<StorePage />} />
+                      <Route path="/store/:storeSlug/item/:itemSlug" element={<ItemPage />} />
+                      <Route path="/category/:categorySlug" element={<CategoryPage />} />
+                      <Route path="/search" element={<SearchPage />} />
+                      <Route path="/cart" element={<CartPage />} />
+                      <Route path="/checkout" element={<CheckoutPage />} />
+                      <Route path="/order/:orderId" element={<OrderPage />} />
+                      <Route path="/orders" element={<OrdersPage />} />
+                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route path="/login" element={<LoginPage />} />
+                      <Route path="/signup" element={<SignupPage />} />
+                      <Route path="/reset-password" element={<ResetPasswordPage />} />
+                      {/* Fallback: render home for any unknown route. */}
+                      <Route path="*" element={<HomePage />} />
+                    </Routes>
+                  </Suspense>
+                  <Footer />
+                  <MobileNav />
+                </ErrorBoundary>
+
+                {/* Global toast notifications. */}
+                <Toaster
+                  position="top-center"
+                  toastOptions={{
+                    style: { fontFamily: 'var(--font-primary)', fontSize: '0.9rem' },
+                    success: { iconTheme: { primary: '#1a6b3c', secondary: '#fff' } },
+                  }}
+                />
+              </BrowserRouter>
+            </CartProvider>
+          </LocationProvider>
         </AuthProvider>
       </LanguageProvider>
     </HelmetProvider>
