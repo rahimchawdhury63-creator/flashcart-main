@@ -1,6 +1,5 @@
 // dataService.js — Read/write helpers around Firestore for stores, items, orders, reviews.
-// Falls back to demo data (demoData.js) when Firestore is empty/unavailable, so the UI
-// always renders meaningful, SEO-friendly content.
+// Live Firestore data only (no demo/seed fallback).
 
 import {
   collection,
@@ -17,25 +16,21 @@ import {
 } from 'firebase/firestore'
 import { ref, set } from 'firebase/database'
 import { db, realtimeDb } from '../firebase'
-import { DEMO_STORES, DEMO_ITEMS, DEMO_MENU_CATEGORIES } from './demoData'
 import { notifyPartner } from './orderNotify'
 
 // --- Stores ---
 
 /**
- * Fetch all stores. Returns Firestore data if present, otherwise demo data.
- * @returns {Promise<object[]>}
+ * Fetch all stores from Firestore.
+ * @returns {Promise<object[]>} empty array if none / on error
  */
 export async function fetchStores() {
   try {
-    const snap = await getDocs(query(collection(db, 'stores'), limit(100)))
-    if (!snap.empty) {
-      return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
-    }
+    const snap = await getDocs(query(collection(db, 'stores'), limit(500)))
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
   } catch {
-    // Permission/network error — fall through to demo data.
+    return []
   }
-  return DEMO_STORES
 }
 
 /**
@@ -51,9 +46,51 @@ export async function fetchStoreBySlug(slug) {
       return { id: d.id, ...d.data() }
     }
   } catch {
-    /* fall through */
+    /* ignore */
   }
-  return DEMO_STORES.find((s) => s.slug === slug) || null
+  return null
+}
+
+/**
+ * Build a unified search index: all stores + all items joined to their parent
+ * store (attached as `_store`, with `_storeSlug`). Uses two bulk queries (stores +
+ * items) instead of one-query-per-store. Cached in-memory with a short TTL so
+ * repeated searches in a session are instant but data stays reasonably fresh.
+ * @param {boolean} [force] - bypass the cache
+ * @returns {Promise<{stores:object[], items:object[]}>}
+ */
+let _searchIndexCache = null
+let _searchIndexAt = 0
+const SEARCH_INDEX_TTL = 5 * 60 * 1000 // 5 minutes
+
+export async function buildSearchIndex(force = false) {
+  const fresh = _searchIndexCache && Date.now() - _searchIndexAt < SEARCH_INDEX_TTL
+  if (fresh && !force) return _searchIndexCache
+
+  // Two bulk reads in parallel.
+  const [stores, allItems] = await Promise.all([fetchStores(), fetchAllItems()])
+
+  // Index stores by id for an O(1) join.
+  const storeById = {}
+  for (const s of stores) storeById[s.id] = s
+
+  // Attach parent store to each item; drop orphan items whose store is missing.
+  const items = []
+  for (const it of allItems) {
+    const store = storeById[it.storeId]
+    if (!store) continue
+    items.push({ ...it, _store: store, _storeSlug: store.slug })
+  }
+
+  _searchIndexCache = { stores, items }
+  _searchIndexAt = Date.now()
+  return _searchIndexCache
+}
+
+/** Clear the cached search index (call after data changes). */
+export function clearSearchIndex() {
+  _searchIndexCache = null
+  _searchIndexAt = 0
 }
 
 // --- Items / menu ---
@@ -66,11 +103,24 @@ export async function fetchStoreBySlug(slug) {
 export async function fetchItems(storeId) {
   try {
     const snap = await getDocs(query(collection(db, 'items'), where('storeId', '==', storeId)))
-    if (!snap.empty) return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
   } catch {
-    /* fall through */
+    return []
   }
-  return DEMO_ITEMS[storeId] || []
+}
+
+/**
+ * Fetch ALL items across every store in one query (used to build the search index
+ * efficiently instead of one query per store).
+ * @returns {Promise<object[]>}
+ */
+export async function fetchAllItems() {
+  try {
+    const snap = await getDocs(query(collection(db, 'items'), limit(2000)))
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+  } catch {
+    return []
+  }
 }
 
 /**
@@ -82,12 +132,10 @@ export async function fetchMenuCategories(storeId) {
     const snap = await getDocs(
       query(collection(db, 'menuCategories'), where('storeId', '==', storeId))
     )
-    if (!snap.empty)
-      return snap.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => a.order - b.order)
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => (a.order || 0) - (b.order || 0))
   } catch {
-    /* fall through */
+    return []
   }
-  return DEMO_MENU_CATEGORIES[storeId] || []
 }
 
 /**
