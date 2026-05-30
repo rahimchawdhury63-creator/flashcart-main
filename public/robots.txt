@@ -1,0 +1,15 @@
+# robots.txt for FlashCart Bangladesh
+User-agent: *
+Allow: /
+
+# Disallow private/transactional pages from indexing
+Disallow: /cart
+Disallow: /checkout
+Disallow: /profile
+Disallow: /login
+Disallow: /signup
+Disallow: /reset-password
+
+# Sitemaps
+Sitemap: https://flashcart.bsdc.info.bd/sitemap.xml
+Sitemap: https://flashcart.bsdc.info.bd/sitemap-stores.xml

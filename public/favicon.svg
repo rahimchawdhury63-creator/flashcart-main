@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- FlashCart favicon: green rounded square with a golden lightning-cart mark -->
+  <rect width="64" height="64" rx="14" fill="#1A6B3C"/>
+  <path d="M14 18h4l4.5 23a3 3 0 0 0 3 2.4h17a3 3 0 0 0 3-2.4L49 24H20"
+    fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M34 20l-5 8h6l-4 9 11-12h-6l5-5z" fill="#F4A823"/>
+  <circle cx="27" cy="50" r="3" fill="#FFFFFF"/>
+  <circle cx="43" cy="50" r="3" fill="#FFFFFF"/>
+</svg>

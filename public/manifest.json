@@ -1,0 +1,16 @@
+{
+  "name": "FlashCart Bangladesh",
+  "short_name": "FlashCart",
+  "description": "Free cash-on-delivery delivery platform for local stores in Bangladesh.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8FAF9",
+  "theme_color": "#1A6B3C",
+  "lang": "bn",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "categories": ["shopping", "food", "business"]
+}
